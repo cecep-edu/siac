@@ -17,4 +17,4 @@ build
 nbproject/
 fuel/app/cache
 fuel/app/config/credentials.php
-
+*.swp
