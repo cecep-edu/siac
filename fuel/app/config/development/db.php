@@ -5,9 +5,24 @@
 
 return array(
 	'default' => array(
+		'type'        => 'mysqli',
 		'connection'  => array(
-			'dsn'        => 'mysql:host=localhost;dbname=siac_devel',
+			'hostname'   => 'localhost',
 			'username'   => 'root',
+<<<<<<< HEAD
 			'password'   => 'root',		),
+=======
+			'password'   => 'root',
+			'database'   => 'siac_devel',
+			'persistent' => false,
+		),
+		'identifier'   => '`',
+		'table_prefix' => '',
+		'charset'      => 'utf8',
+		'collation'    => false,
+		'enable_cache' => true,
+		'profiling'    => true,
+		'readonly'     => false,
+>>>>>>> 8805fe9b5174c051a480669fcc11e88658e49c88
 	),
 );

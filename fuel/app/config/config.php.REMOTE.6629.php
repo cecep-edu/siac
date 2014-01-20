@@ -257,11 +257,7 @@ return array(
 	/**************************************************************************/
 	/* Always Load                                                            */
 	/**************************************************************************/
-<<<<<<< HEAD
-	 'always_load'  => array(
-=======
 	'always_load'  => array(
->>>>>>> 8805fe9b5174c051a480669fcc11e88658e49c88
 
 		/**
 		 * These packages are loaded on Fuel's startup.
@@ -274,16 +270,10 @@ return array(
 		 *     array('auth'	=> PKGPATH.'auth/')
 		 * );
 		 */
-<<<<<<< HEAD
-		 'packages'  => array(
-		 	//'orm',
-		 ),
-=======
 		'packages'  => array(
 			'orm',
 			'auth',
 		),
->>>>>>> 8805fe9b5174c051a480669fcc11e88658e49c88
 
 		/**
 		 * These modules are always loaded on Fuel's startup. You can specify them
@@ -321,10 +311,6 @@ return array(
 		 * If you don't want the lang in a group use null as groupname.
 		 */
 		// 'language'  => array(),
-<<<<<<< HEAD
-	 ),
-=======
 	),
->>>>>>> 8805fe9b5174c051a480669fcc11e88658e49c88
 
 );
