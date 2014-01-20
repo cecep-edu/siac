@@ -3,8 +3,8 @@
 class Controller_Sesiones extends Controller_Template
 {
 
-	public function action_index()
-	{
+    public function action_index()
+    {
         // comprobar si ya está logeado
         if (\Auth::check())
         {
@@ -14,11 +14,10 @@ class Controller_Sesiones extends Controller_Template
         }
         else
         {
-		    $data["subnav"] = array('index'=> 'active' );
-		    $this->template->title = 'Sesiones &raquo; Index';
-		    $this->template->content = View::forge('sesiones/index', $data);
+            $this->template->title = 'Sesiones &raquo; Index';
+            $this->template->content = View::forge('sesiones/index');
         }
-	}
+    }
 
     public function action_login()
     {
@@ -52,22 +51,22 @@ class Controller_Sesiones extends Controller_Template
         {
             // login fallido, mostrar un mensaje de error
             \Session::set_flash('login-failure', __('login.failure'));
-            \Response::redirect('login');
+            \Response::redirect('usuarios/login');
         }
     }
 
-	public function action_logout()
-	{
-		// borrar la cookie del remember me
-		\Auth::dont_remember_me();
+    public function action_logout()
+    {
+        // borrar la cookie del remember me
+        \Auth::dont_remember_me();
 
-		// logout
-		\Auth::logout();
+        // logout
+        \Auth::logout();
 
-		// informar al usuario de que el logout tuvo éxito
+        // informar al usuario de que el logout tuvo éxito
         \Session::set_flash('logged-out', __('login.logged-out'));
 
-		// redirect a la home
-		\Response::redirect('/');
-	}
+        // redirect a la home
+        \Response::redirect('/');
+    }
 }

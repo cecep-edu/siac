@@ -1,0 +1,1 @@
+<h1>Mostrar Usuario <?php echo $usuario_id; ?></h1>
