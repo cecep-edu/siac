@@ -44,12 +44,13 @@
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Usuarios <b class="caret"></b></a>
         <ul class="dropdown-menu">
           <li><a href="/usuarios">Listado</a></li>
-          <li><a href="/usuarios/nuevo">Crear</a></li>
-          <li><a href="/usuarios/login">Conectar</a></li>
-          <li class="divider"></li>
-          <li><a href="#">Separated link</a></li>
         </ul>
       </li>
+    <?php if ( ! Auth::check()): ?>
+      <li><a href="/usuarios/login">Conectar</a></li>
+    <?php else: ?>
+      <li><a href="/usuarios/logout">Desconectar</a></li>
+    <?php endif; ?>
     </ul>
   </div><!-- /.navbar-collapse -->
 </nav>

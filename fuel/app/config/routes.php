@@ -23,7 +23,9 @@ return array(
 		array('GET', new Route('sesiones/index')),
 		array('POST', new Route('sesiones/login')),
 	),
-	'usuarios/logout' => array(array('POST', new Route('sesiones/logout'))),
+	// mirar como hacer para que esto funcione
+	//'usuarios/logout' => array(array('POST', new Route('sesiones/logout'))),
+	'usuarios/logout' => array(array('GET', new Route('sesiones/logout'))),
 
 	'_root_'  => 'welcome/index',  // The default route
 	'_404_'   => 'welcome/404',    // The main 404 route	
