@@ -25,7 +25,7 @@ class Controller_Usuarios extends Controller_Template
 		);
 
 		// informar al usuario de que el usuario se ha creado
-		\Session::set_flash('user-created', __('users.created'));
+		\Session::set_flash('siac-message', array('success' => 'Usuario creado con éxito.'));
 
 		\Response::redirect('/usuarios');
 	}
@@ -54,7 +54,7 @@ class Controller_Usuarios extends Controller_Template
 		$usuario->save();
 
 		// Informar al usuario de que la actualización fué correcta
-		\Session::set_flash('user-updated', __('users.updated'));
+		\Session::set_flash('siac-message', array('success' => 'Usuario actualizado con éxito.'));
 
 		\Response::redirect('/usuarios/'.$this->param('id'));
 	}
@@ -65,7 +65,7 @@ class Controller_Usuarios extends Controller_Template
 		$usuario->delete();
 
 	    // informar al usuario de que la eliminación de usuario fué correcta
-        \Session::set_flash('user-destroyed', __('users.destroyed'));
+	    \Session::set_flash('siac-message', array('sucess' => 'Usuario eliminado con éxito.'));
 
 		\Response::redirect('/usuarios');
 	}

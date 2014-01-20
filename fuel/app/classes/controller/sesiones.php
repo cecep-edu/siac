@@ -9,7 +9,7 @@ class Controller_Sesiones extends Controller_Template
         if (\Auth::check())
         {
             // si, así que redirect a la página anterior o a la home
-            \Session::set_flash('already-logged-in', __('login.already-logged-in'));
+            \Session::set_flash('siac-message', array('danger' => 'Ya estabas conectado al sistema.'));
             \Response::redirect_back();
         }
         else
@@ -25,7 +25,7 @@ class Controller_Sesiones extends Controller_Template
         if (\Auth::check())
         {
             // si, así que redirect a la página anterior o a la home
-            \Session::set_flash('already-logged-in', __('login.already-logged-in'));
+            \Session::set_flash('siac-message', array('danger' => 'Ya estabas conectado al sistema.'));
             \Response::redirect_back();
         }
 
@@ -45,12 +45,13 @@ class Controller_Sesiones extends Controller_Template
             }
 
             // el usuario ya está logeado, redirigirle a la home
+            \Session::set_flash('siac-message', array('success' => 'Has conectado al sistema con éxito.'));
             \Response::redirect('/');
         }
         else
         {
             // login fallido, mostrar un mensaje de error
-            \Session::set_flash('login-failure', __('login.failure'));
+            \Session::set_flash('siac-message', array('danger' => 'Usuario o contraseña incorrectos.'));
             \Response::redirect('usuarios/login');
         }
     }
@@ -64,7 +65,7 @@ class Controller_Sesiones extends Controller_Template
         \Auth::logout();
 
         // informar al usuario de que el logout tuvo éxito
-        \Session::set_flash('logged-out', __('login.logged-out'));
+        \Session::set_flash('siac-message', array('success' => 'Desconectado del sistema con éxito.'));
 
         // redirect a la home
         \Response::redirect('/');

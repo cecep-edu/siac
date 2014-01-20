@@ -4,10 +4,19 @@
 	<meta charset="utf-8">
 	<title><?php echo $title; ?></title>
 	<?php echo Asset::css('bootstrap.css'); ?>
+  <?php echo Asset::css('siac.css'); ?>
 
 
 </head>
 <body>
+
+
+<?php if (\Session::get_flash('siac-message')): ?>
+  <div class="siac-message alert alert-<?php echo array_keys(\Session::get_flash('siac-message'))[0]; ?> alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <strong>SIAC:</strong> <?php echo array_values(\Session::get_flash('siac-message'))[0]; ?>
+  </div>
+<?php endif; ?>
 
 <nav class="navbar navbar-inverse" role="navigation">
   <!-- Brand and toggle get grouped for better mobile display -->
@@ -75,6 +84,7 @@
 
 <?php echo Asset::js('jquery.js') ?>
 <?php echo Asset::js('bootstrap.js'); ?>
+<?php echo Asset::js('siac.js'); ?>
 
 </body>
 </html>
