@@ -124,6 +124,15 @@ class Usuario extends \Orm\Model
 		),
 	);
 
+	protected static $_has_one = array(
+		'informacion_personals' => array(
+			'model_to' => 'Model_Informacion_Personal',
+			'key_from' => 'id',
+			'key_to' => 'usuario_id',
+			'cascade_delete' => true,
+		),
+	);
+	
 	/**
 	 * @var array	has_many relationships
 	 */

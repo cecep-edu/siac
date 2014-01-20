@@ -7,6 +7,7 @@ return array(
 			'default' => 
 			array(
 				0 => '001_create_informacion_personals',
+				1 => '002_add_column_usuario_id_to_informacion_personal',
 			),
 		),
 		'module' => 

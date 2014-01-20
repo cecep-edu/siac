@@ -9,9 +9,6 @@ return array(
 		'connection'  => array(
 			'hostname'   => 'localhost',
 			'username'   => 'root',
-<<<<<<< HEAD
-			'password'   => 'root',		),
-=======
 			'password'   => 'root',
 			'database'   => 'siac_devel',
 			'persistent' => false,
@@ -23,6 +20,5 @@ return array(
 		'enable_cache' => true,
 		'profiling'    => true,
 		'readonly'     => false,
->>>>>>> 8805fe9b5174c051a480669fcc11e88658e49c88
 	),
 );
