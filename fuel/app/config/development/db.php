@@ -6,9 +6,8 @@
 return array(
 	'default' => array(
 		'connection'  => array(
-			'dsn'        => 'mysql:host=localhost;dbname=siac',
-			'username'   => 'siac',
-			'password'   => 'siac',
-		),
+			'dsn'        => 'mysql:host=localhost;dbname=siac_devel',
+			'username'   => 'root',
+			'password'   => 'root',		),
 	),
 );
