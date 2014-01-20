@@ -9,10 +9,14 @@ return array(
 	'usuarios/nuevo' => array(array('GET', new Route('usuarios/nuevo'))),
 	'usuarios/(?P<id>:num)' => array(
 		array('GET', new Route('usuarios/mostrar')),
-		array('PUT', new Route('usuarios/actualizar')),
-		array('DELETE', new Route('usuarios/borrar')),
+		// mirar como hacer para funcionar esto
+		//array('PUT', new Route('usuarios/actualizar')),
+		// mirar como hacer funcionar esto
+		//array('DELETE', new Route('usuarios/borrar')),
 	),
+	'usuarios/(?P<id>:num)/eliminar' => array(array('GET', new route('usuarios/borrar'))),
 	'usuarios/(?P<id>:num)/editar' => array(array('GET', new Route('usuarios/editar'))),
+	'usuarios/(?P<id>:num)/actualizar' => array(array('POST', new Route('usuarios/actualizar'))),
 
 	// sesiones
 	'usuarios/login' => array(
