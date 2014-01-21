@@ -49,12 +49,14 @@
       </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
+    <?php if (Auth::check()): ?>
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Usuarios <b class="caret"></b></a>
         <ul class="dropdown-menu">
           <li><a href="/usuarios">Listado</a></li>
         </ul>
       </li>
+    <?php endif; ?>
     <?php if ( ! Auth::check()): ?>
       <li><a href="/usuarios/login">Conectar</a></li>
     <?php else: ?>
