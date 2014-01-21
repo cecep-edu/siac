@@ -46,7 +46,7 @@ class Usuario
 
 		if (count($params) < 3)
 		{
-			echo "El comando correcto es:\noil r usuario:crear usuario contraseña email\n";
+			echo "El comando correcto es:\noil r usuario:crear \"usuario contraseña email\"\n";
 			die();
 		}
 
