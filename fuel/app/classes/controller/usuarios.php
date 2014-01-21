@@ -5,7 +5,7 @@ class Controller_Usuarios extends Controller_Template
 
 	public function action_index()
 	{
-		$data["usuarios"] = \Model\Auth_User::find('all');
+		$data["usuarios"] = Model_Usuario::find('all');
 		$this->template->title = 'Usuarios &raquo; Index';
 		$this->template->content = View::forge('usuarios/index', $data);
 	}
@@ -32,14 +32,14 @@ class Controller_Usuarios extends Controller_Template
 
 	public function action_mostrar()
 	{
-		$data["usuario"] = \Model\Auth_User::find($this->param('id'));
+		$data["usuario"] = Model_Usuario::find($this->param('id'));
 		$this->template->title = 'Mostrar &raquo; Usuario';
 		$this->template->content = View::forge('usuarios/mostrar', $data);
 	}
 
 	public function action_editar()
 	{
-		$data["usuario"] = \Model\Auth_User::find($this->param('id'));
+		$data["usuario"] = Model_Usuario::find($this->param('id'));
 
 		$this->template->title = 'Editar &raquo; Usuario';
 		$this->template->content = View::forge('usuarios/editar', $data);
