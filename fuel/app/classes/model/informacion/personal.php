@@ -31,4 +31,12 @@ class Model_Informacion_Personal extends \Orm\Model
 	);
 	protected static $_table_name = 'informacion_personals';
 
+	protected static $_belongs_to = array(
+		'usuarios' => array(
+			'model_to' => 'Usuario',
+			'key_from' => 'usuario_id',
+			'key_to'   => 'id',
+		),
+	);
+
 }

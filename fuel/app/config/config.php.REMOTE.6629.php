@@ -257,8 +257,19 @@ return array(
 	/**************************************************************************/
 	/* Always Load                                                            */
 	/**************************************************************************/
+	'always_load'  => array(
 
-	 'always_load'  => array(
+		/**
+		 * These packages are loaded on Fuel's startup.
+		 * You can specify them in the following manner:
+		 *
+		 * array('auth'); // This will assume the packages are in PKGPATH
+		 *
+		 * // Use this format to specify the path to the package explicitly
+		 * array(
+		 *     array('auth'	=> PKGPATH.'auth/')
+		 * );
+		 */
 		'packages'  => array(
 			'orm',
 			'auth',
@@ -300,7 +311,6 @@ return array(
 		 * If you don't want the lang in a group use null as groupname.
 		 */
 		// 'language'  => array(),
-
 	),
 
 );

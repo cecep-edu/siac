@@ -15,8 +15,10 @@ build
 /fuel/app/cache/*/*
 /fuel/app/config/crypt.php
 nbproject/
+<<<<<<< HEAD
 /fuel/app/config/development/migrations.php
+=======
 fuel/app/cache
 fuel/app/config/credentials.php
 *.swp
-
+>>>>>>> 8805fe9b5174c051a480669fcc11e88658e49c88

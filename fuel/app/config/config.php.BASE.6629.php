@@ -44,18 +44,18 @@ return array(
 	 */
 	// 'index_file' => false,
 
-	'profiling'  => true,
+	// 'profiling'  => false,
 
 	/**
 	 * Default location for the file cache
 	 */
-	'cache_dir'       => APPPATH.'cache/',
+	// 'cache_dir'       => APPPATH.'cache/',
 
 	/**
 	 * Settings for the file finder cache (the Cache class has it's own config!)
 	 */
-	'caching'         => false,
-	'cache_lifetime'  => 3600, // In Seconds
+	// 'caching'         => false,
+	// 'cache_lifetime'  => 3600, // In Seconds
 
 	/**
 	 * Callback to use with ob_start(), set this to 'ob_gzhandler' for gzip encoding of output
@@ -78,14 +78,14 @@ return array(
 	/**
 	 * Localization & internationalization settings
 	 */
-	'language'           => 'es', // Default language
-	'language_fallback'  => 'es', // Fallback language when file isn't available for default language
-	'locale'             => 'es_419', // PHP set_locale() setting, null to not set
+	// 'language'           => 'en', // Default language
+	// 'language_fallback'  => 'en', // Fallback language when file isn't available for default language
+	// 'locale'             => 'en_US', // PHP set_locale() setting, null to not set
 
 	/**
 	 * Internal string encoding charset
 	 */
-	'encoding'  => 'UTF-8',
+	// 'encoding'  => 'UTF-8',
 
 	/**
 	 * DateTime settings
@@ -93,8 +93,8 @@ return array(
 	 * server_gmt_offset	in seconds the server offset from gmt timestamp when time() is used
 	 * default_timezone		optional, if you want to change the server's default timezone
 	 */
-	'server_gmt_offset'  => 0,
-	'default_timezone'   => 'America/Guayaquil',
+	// 'server_gmt_offset'  => 0,
+	// 'default_timezone'   => null,
 
 	/**
 	 * Logging Threshold.  Can be set to any of the following:
@@ -257,12 +257,22 @@ return array(
 	/**************************************************************************/
 	/* Always Load                                                            */
 	/**************************************************************************/
+	// 'always_load'  => array(
 
-	 'always_load'  => array(
-		'packages'  => array(
-			'orm',
-			'auth',
-		),
+		/**
+		 * These packages are loaded on Fuel's startup.
+		 * You can specify them in the following manner:
+		 *
+		 * array('auth'); // This will assume the packages are in PKGPATH
+		 *
+		 * // Use this format to specify the path to the package explicitly
+		 * array(
+		 *     array('auth'	=> PKGPATH.'auth/')
+		 * );
+		 */
+		// 'packages'  => array(
+		// 	//'orm',
+		// ),
 
 		/**
 		 * These modules are always loaded on Fuel's startup. You can specify them
@@ -287,9 +297,7 @@ return array(
 		 * add it like 'session' => 'auth'.
 		 * If you don't want the config in a group use null as groupname.
 		 */
-		'config'  => array(
-			'credentials' => null,
-		),
+		// 'config'  => array(),
 
 		/**
 		 * Language files to autoload
@@ -300,7 +308,6 @@ return array(
 		 * If you don't want the lang in a group use null as groupname.
 		 */
 		// 'language'  => array(),
-
-	),
+	// ),
 
 );
