@@ -3,6 +3,20 @@
 class Controller_Usuarios extends Controller_Template
 {
 
+	// Esta función se ejecuta antes que cualquier otra
+	// en este controlador
+	public function before()
+	{
+		parent::before();
+
+		// Si no está logeado...
+		if (!Auth::check())
+		{
+			\Response::redirect('/usuarios/login');
+		}
+
+	}
+
 	public function action_index()
 	{
 		$data["usuarios"] = Model_Usuario::find('all');
