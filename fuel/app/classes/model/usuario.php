@@ -125,7 +125,7 @@ class Model_Usuario extends \Orm\Model
 	);
 
 	protected static $_has_one = array(
-		'informacion_personals' => array(
+		'informacion_personal' => array(
 			'model_to' => 'Model_Informacion_Personal',
 			'key_from' => 'id',
 			'key_to' => 'usuario_id',
