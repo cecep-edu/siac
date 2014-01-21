@@ -12,7 +12,7 @@
 
 //namespace Auth\Model;
 
-class Usuario extends \Orm\Model
+class Model_Usuario extends \Orm\Model
 {
 	/**
 	 * @var  string  connection to use
@@ -129,6 +129,7 @@ class Usuario extends \Orm\Model
 			'model_to' => 'Model_Informacion_Personal',
 			'key_from' => 'id',
 			'key_to' => 'usuario_id',
+			'cascade_save' => true,
 			'cascade_delete' => true,
 		),
 	);
