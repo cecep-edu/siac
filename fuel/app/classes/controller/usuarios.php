@@ -32,15 +32,23 @@ class Controller_Usuarios extends Controller_Template
 
 	public function action_crear()
 	{
-		\Auth::create_user(
+		$result = \Model_Usuario::crear(
 			\Input::post('username'),
 			\Input::post('password'),
 			\Input::post('email')
 		);
 
-		// informar al usuario de que el usuario se ha creado
-		\Session::set_flash('siac-message', array('success' => 'Usuario creado con éxito.'));
+		if ( $result)
+		{
+			// informar al usuario de que el usuario se ha creado
+			\Session::set_flash('siac-message', array('success' => 'Usuario creado con éxito.'));
+		}
+		else{
+			// informar al usuario de que el usuario se ha creado
+			\Session::set_flash('siac-message', array('danger' => 'No se pudo crear el usuario'));
 
+		}
+		
 		\Response::redirect('/usuarios');
 	}
 

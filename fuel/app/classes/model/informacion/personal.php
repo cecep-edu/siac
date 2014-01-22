@@ -15,6 +15,7 @@ class Model_Informacion_Personal extends \Orm\Model
 		'correo',
 		'conadis',
 		'ruta_foto',
+		'usuario_id',
 		'created_at',
 		'updated_at',
 	);
