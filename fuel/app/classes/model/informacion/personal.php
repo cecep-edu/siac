@@ -34,7 +34,7 @@ class Model_Informacion_Personal extends \Orm\Model {
         'identificador' => array(
             'data_type' => 'string',
             'label' => 'ID',
-            'validation' => array('required','numeric','max_length' => array(15), 'min_length' => array(10)),
+            'validation' => array('required','max_length' => array(15), 'min_length' => array(5)),
             'form' => array('type' => 'text',
                 'class' => 'form-control',
                 'placeholder' => "Ejemplo: 0705206687"
@@ -74,7 +74,7 @@ class Model_Informacion_Personal extends \Orm\Model {
         'telefono' => array(
             'data_type' => 'string',
             'label' => 'Teléfono',
-             'validation' => array('required','numeric','max_length' => array(15), 'min_length' => array(10)),
+             'validation' => array('required','max_length' => array(15), 'min_length' => array(5)),
             'form' => array('type' => 'text', 'class' => 'form-control',
                 'placeholder' => "Escriba  su teléfono"
             )
@@ -82,7 +82,7 @@ class Model_Informacion_Personal extends \Orm\Model {
         'correo' => array(
             'data_type' => 'string',
             'label' => 'Correo',
-            'validation' => array('required', 'valid_email','max_length' => array(80), 'min_length' => array(10)),
+            'validation' => array('required', 'valid_email','max_length' => array(80), 'min_length' => array(5)),
             'form' => array('type' => 'email', 'class' => 'form-control',
                 'placeholder' => "Escriba su correo"
             )
@@ -90,7 +90,7 @@ class Model_Informacion_Personal extends \Orm\Model {
         'conadis' => array(
             'data_type' => 'string',
             'label' => 'Conadis',
-             'validation' => array('required','numeric','max_length' => array(15), 'min_length' => array(8)),
+             'validation' => array('required','max_length' => array(15), 'min_length' => array(5)),
             'form' => array('type' => 'text', 'class' => 'form-control',
                 'placeholder' => "N° de carnet"
             )
@@ -99,7 +99,7 @@ class Model_Informacion_Personal extends \Orm\Model {
             'data_type' => 'string',
             'label' => 'Seleccione la foto',
             'form' => array(
-                'type' => 'multipart/form-data', 'class' => 'form-control')
+                'type' => 'text', 'class' => 'form-control')
         ),
         'created_at' => array(
             'data_type' => 'Date',
@@ -124,7 +124,7 @@ class Model_Informacion_Personal extends \Orm\Model {
     );
     protected static $_table_name = 'informacion_personals';
     protected static $_belongs_to = array(
-        'usuario' => array(
+        'usuarios' => array(
             'model_to' => 'Model_Usuario',
             'key_from' => 'usuario_id',
             'key_to' => 'id',
