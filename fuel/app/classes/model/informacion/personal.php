@@ -99,7 +99,7 @@ class Model_Informacion_Personal extends \Orm\Model {
             'data_type' => 'string',
             'label' => 'Seleccione la foto',
             'form' => array(
-                'type' => 'text', 'class' => 'form-control')
+                'type' => 'file', 'class' => 'form-control')
         ),
         'created_at' => array(
             'data_type' => 'Date',
