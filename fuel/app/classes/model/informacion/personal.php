@@ -3,7 +3,7 @@
 class Model_Informacion_Personal extends \Orm\Model
 {
 	protected static $_properties = array(
-		'id',
+		'id',//hola antonio
 		'nombre',
 		'apellido',
 		'identificador',
