@@ -15,11 +15,11 @@ class Controller_Infopersonal extends Controller_Template {
         $usuario = \Auth::instance()->get_user_id(); //user[1]: es el id del usuario registrado.
         $data["subnav"] = array('create' => 'active');
         $this->template->title = 'Infopersonal &raquo; Create';
-        $this->template->content = View::forge('infopersonal/create', $data);
-
+        //$this->template->content = View::forge('infopersonal/create', $data);
+        $view=View::forge('infopersonal/create', $data);
         $config = array(
             'path' => DOCROOT . 'uploads/',
-            'ext_whitelist' => array('gif', 'jpg', 'png'),
+            'ext_whitelist' => array('gif', 'jpg','jpeg', 'png'),
             'max_size' => 500 * 1024,
         );
         $path = $_SERVER['DOCUMENT_ROOT'];
@@ -62,7 +62,9 @@ class Controller_Infopersonal extends Controller_Template {
             $this->template->messages = $fieldset->validation()->error();
         }
 
-        $this->template->set('content', $form->build(), false);
+        $view->set('content', $form->build(), false);
+        //$this->template->set('content', $form->build(), false);
+        $this->template->content =$view;
     }
 
     public function action_edit() {
@@ -70,58 +72,69 @@ class Controller_Infopersonal extends Controller_Template {
 
         $data["subnav"] = array('edit' => 'active');
         $this->template->title = 'Infopersonal &raquo; Edit';
-        $this->template->content = View::forge('infopersonal/edit', $data);
-        
+    
+        //$view=View::forge('infopersonal/edit', $data);
+
         $config = array(
             'path' => DOCROOT . 'uploads/',
-            'ext_whitelist' => array('gif', 'jpg', 'png'),
+            'ext_whitelist' => array('gif', 'jpg','jpeg', 'png'),
             'max_size' => 500 * 1024,
         );
         $path = $_SERVER['DOCUMENT_ROOT'];
 
         $personal = \Model_Informacion_Personal::query()->where('usuario_id', '=', $user[1])->get_one();
         $fieldset = Fieldset::forge()->add_model('Model_Informacion_Personal')->populate($personal);
+        $fieldset->add('legend')->set_template('<legend>Perfil Profesional</legend>');
         $form = $fieldset->form();
         $fieldset->set_config('form_attributes', array('enctype' => 'multipart/form-data'));
+        
+         $form->add('foto_perfil','Foto',array('type'=>'image','src'=> '/uploads/'.$personal->ruta_foto));
+       
         $form->add('submit', '', array('type' => 'submit', 'value' => 'Actualizar', 'class' => 'btn btn-primary'));
-
+       
+        
         if ($fieldset->validation()->run() == true) {
             $fields = $fieldset->validated();
 
             Upload::process($config);
+
+            //$post = new Model_Persona;
+            $personal->nombre = $fields['nombre'];
+            $personal->apellido = $fields['apellido'];
+            $personal->identificador = $fields['identificador'];
+            $personal->tipo_identificador = $fields['tipo_identificador'];
+            $personal->pais_id = $fields['pais_id'];
+            $personal->ciudad_residencia_id = $fields['ciudad_residencia_id'];
+            $personal->direccion = $fields['direccion'];
+            $personal->telefono = $fields['telefono'];
+            $personal->correo = $fields['correo'];
+            $personal->conadis = $fields['conadis'];
+
             if (Upload::is_valid()) {
                 $result = Upload::get_files();
-                //$post = new Model_Persona;
-                $personal->nombre = $fields['nombre'];
-                $personal->apellido = $fields['apellido'];
-                $personal->identificador = $fields['identificador'];
-                $personal->tipo_identificador = $fields['tipo_identificador'];
-                $personal->pais_id = $fields['pais_id'];
-                $personal->ciudad_residencia_id = $fields['ciudad_residencia_id'];
-                $personal->direccion = $fields['direccion'];
-                $personal->telefono = $fields['telefono'];
-                $personal->correo = $fields['correo'];
-                $personal->conadis = $fields['conadis'];
                 $img_nombre = $fields['identificador'] . '.' . $result[0]['extension'];
-                $personal->ruta_foto = $fields['ruta_foto'];
-                
-                 Upload::save();
-
+                $personal->ruta_foto = $img_nombre;
+                Upload::save();
                 File::rename($path . '/uploads/' . $result[0]['name'], $path . '/uploads/' . $img_nombre);
-                
-                if ($personal->save()) {
-                    \Response::redirect('infopersonal/index');
-                }
+            }
+
+            if ($personal->save()) {
+                \Response::redirect('infopersonal/index');
             }
         } else {
             $this->template->messages = $fieldset->validation()->error();
         }
-
+        
+        $this->template->content = View::forge('infopersonal/edit', $data);
         $this->template->set('content', $form->build(), false);
+         //$this->template->content=$view;
     }
 
     public function action_view() {
+        $user = \Auth::instance()->get_user_id(); //user[1]
+        $personal = \Model_Informacion_Personal::query()->where('usuario_id', '=', $user[1])->get_one();
         $data["subnav"] = array('view' => 'active');
+        $data['personal']=$personal;
         $this->template->title = 'Infopersonal &raquo; View';
         $this->template->content = View::forge('infopersonal/view', $data);
     }

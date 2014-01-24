@@ -54,13 +54,15 @@ class Model_Informacion_Personal extends \Orm\Model {
             'label' => 'País',
             'form' => array('type' => 'select', 'class' => 'form-control',
                 'placeholder' => "Seleccione su País",
+                 'options' => array(1 => 'Ecuador', 2 => 'Colombia',3 => 'España',4 => 'Perú')
             )
         ),
         'ciudad_residencia_id' => array(
             'data_type' => 'int',
             'label' => 'Ciudad de Residencia',
             'form' => array('type' => 'select', 'class' => 'form-control',
-                'placeholder' => "Seleccione su Ciudad"
+                'placeholder' => "Seleccione su Ciudad",
+                 'options' => array(1 => 'Quito - Ecuador', 2 => 'Bogota - Colombia',3 => 'Madrid - España',4 => 'Lima - Perú')
             )
         ),
         'direccion' => array(
