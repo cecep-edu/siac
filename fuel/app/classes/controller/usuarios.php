@@ -12,6 +12,7 @@ class Controller_Usuarios extends Controller_Template
 		// Si no está logeado...
 		if (!Auth::check())
 		{
+			\Session::set_flash('siac-message', array('danger' => 'Debes estar conectado para acceder a esa área.'));
 			\Response::redirect('/usuarios/login');
 		}
 
@@ -44,9 +45,8 @@ class Controller_Usuarios extends Controller_Template
 			\Session::set_flash('siac-message', array('success' => 'Usuario creado con éxito.'));
 		}
 		else{
-			// informar al usuario de que el usuario se ha creado
-			\Session::set_flash('siac-message', array('danger' => 'No se pudo crear el usuario'));
-
+			// informar al usuario de que el usuario no se ha creado
+			\Session::set_flash('siac-message', array('danger' => 'No se pudo crear el usuario.'));
 		}
 		
 		\Response::redirect('/usuarios');
