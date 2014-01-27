@@ -35,6 +35,7 @@ class Model_Usuario extends \Orm\Model
 	public static function crear($usuario, $password, $correo)
 	{
 		try{
+                   
 			\Auth::create_user(
 				$usuario,
 				$password,
