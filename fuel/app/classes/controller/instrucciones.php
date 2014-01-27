@@ -13,12 +13,16 @@ class Controller_Instrucciones extends Controller_Template {
         $data["subnav"] = array('create' => 'active');
         $this->template->title = 'Instruccione &raquo; Create';
         $this->template->content = View::forge('instrucciones/create', $data);
-
+        
         //se crea lo forma de ingreso de una nueva instrucción
         $fieldset = Fieldset::forge()->add_model('Model_Conf_Instruccion');
         $form = $fieldset->form();
-        $form->add('submit', '', array('type' => 'submit', 'value' => 'Crear', 'class' => 'btn medium primary'));
-
+        $form->add('crear', '', array('type' => 'submit', 'value' => 'Crear', 'class' => 'btn medium primary'));
+        $form->add('cancelar','',array('type'=>'button','value'=>'Cancelar','class'=>'btn medium primary','onclick'=>"location.href='http://siac.iaen/instrucciones/index'"));
+        
+        
+        $this->template->set('content', $form->build(), false);
+        
         //Guarda el nuevo registro si los datos pasan la validación
         if ($fieldset->validation()->run() == true) {
             $fields = $fieldset->validated();
@@ -29,7 +33,6 @@ class Controller_Instrucciones extends Controller_Template {
             $instruccion->id_especializacion = $fields['id_especializacion'];
             $instruccion->id_titulo = $fields['id_titulo'];
             $instruccion->registro_oficial = $fields['registro_oficial'];
-
             if ($instruccion->save()) {
                 \Response::redirect('instrucciones/index');
             } else {
@@ -39,20 +42,22 @@ class Controller_Instrucciones extends Controller_Template {
             $this->template->messages = $fieldset->validation()->error();
         }
 
-        $this->template->set('content', $form->build(), false);
+        
     }
 
     public function action_edit($id = null) {
+        
         $data["subnav"] = array('edit' => 'active');
         $this->template->title = 'Instrucciones &raquo; Edit';
-        $this->template->content = View::forge('instrucciones/edit', $data);
-
+        //$this->template->content = View::forge('instrucciones/edit', $data);
+       
         $instruccion = \Model_Conf_Instruccion::find($id);
 
         $fieldset = Fieldset::forge()->add_model('Model_Conf_Instruccion')->populate($instruccion);
         $form = $fieldset->form();
-        $form->add('submit', '', array('type' => 'submit', 'value' => 'Guardar', 'class' => 'btn medium primary'));
-
+        $form->add('aceptar', '', array('type' => 'submit', 'value' => 'Guardar', 'class' => 'btn medium primary'));
+        $form->add('cancelar','',array('type'=>'submit','value'=>'Cancelar','class'=>'btn medium primary','action'=>'/instrucciones/index'));
+        
         //Guarda el nuevo registro si los datos pasan la validación
         if ($fieldset->validation()->run() == true) {
             $fields = $fieldset->validated();
@@ -74,13 +79,40 @@ class Controller_Instrucciones extends Controller_Template {
 
 
 
-        $this->template->set('content', $form->build(), false);
+       $this->template->set('content', $form->build(),false);
+        
+        
+
     }
         
     public function action_delete($id=null) {
         
         $instruccion = \Model_Conf_Instruccion::find($id);
-        $instruccion->delete();
+        $instruccion->delete();$instruccion = \Model_Conf_Instruccion::find($id);
+
+        $fieldset = Fieldset::forge()->add_model('Model_Conf_Instruccion')->populate($instruccion);
+        $form = $fieldset->form();
+        //$form->add('aceptar', '', array('type' => 'submit', 'value' => 'Guardar', 'class' => 'btn medium primary'));
+        //$form->add('cancelar','',array('type'=>'submit','value'=>'Cancelar','class'=>'btn medium primary','action'=>'/instrucciones/index'));
+        
+        //Guarda el nuevo registro si los datos pasan la validación
+        if ($fieldset->validation()->run() == true) {
+            $fields = $fieldset->validated();
+            $instruccion->id_usuario = $fields['id_usuario'];
+            $instruccion->id_nivel = $fields['id_nivel'];
+            $instruccion->id_institucion = $fields['id_nivel'];
+            $instruccion->id_especializacion = $fields['id_especializacion'];
+            $instruccion->id_titulo = $fields['id_titulo'];
+            $instruccion->registro_oficial = $fields['registro_oficial'];
+
+            if ($instruccion->save()) {
+                \Response::redirect('instrucciones/index');
+            } else {
+                $this->template->messages = "No se ha n podido guardar los datos. Intente nuevamente";
+            }
+        } else {
+            $this->template->messages = $fieldset->validation()->error();
+        }
         
         // informar al usuario de que la eliminación de usuario fué correcta
 	\Session::set_flash('siac-message', array('sucess' => 'Usuario eliminado con éxito.'));

@@ -23,6 +23,7 @@ class Model_Conf_Especializacion extends \Orm\Model
 			'mysql_timestamp' => false,
 		),
 	);
+        
 	protected static $_table_name = 'conf_especializaciones';
         
         protected static $_has_many = array(
@@ -31,8 +32,7 @@ class Model_Conf_Especializacion extends \Orm\Model
                 'model_to'=>'Model_Conf_Instruccion',
                 'key_to'=>'id_especializacion',
                 'cascade_save'=>false,
-                'cascade_detele'=>false,
-                
+                'cascade_detele'=>false,                
             ),
         );
 

@@ -35,8 +35,8 @@
                     <td><?php echo $instrucciones['registro_oficial']; ?></td>
                     
                     <td>
-        		<?php echo Html::anchor('instrucciones/edit/'.$instrucciones->id, 'Editar', array('class' => 'btn btn-warning btn-xs')); ?>
-                        <?php echo Html::anchor('instrucciones/delete/'.$instrucciones->id, 'Eliminar', array('class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('¿Estas seguro?')")); ?>
+        		<?php echo Html::anchor('instrucciones/edit/'.$instrucciones->id, 'Editar', array('class' => 'btn btn-default')); ?>
+                        <?php echo Html::anchor('instrucciones/delete/'.$instrucciones->id, 'Eliminar', array('class' => 'btn btn-primary', 'onclick' => "return confirm('¿Estas seguro?')")); ?>
 
                     </td>
                 </tr>

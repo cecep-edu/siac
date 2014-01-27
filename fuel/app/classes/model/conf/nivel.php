@@ -25,12 +25,13 @@ class Model_Conf_Nivel extends \Orm\Model
 	);
 	protected static $_table_name = 'conf_niveles';
         
-        protected static $has_many= array(
+        protected static $_has_many= array(
             'conf_intrucciones'=>array(
                 'key_from'=>'id',
                 'model_to'=>'Model_Conf_Instruccion',
                 'key_to'=>'id_nivel',
-                
+                'cascade_save'=>false,
+                'cascade_detele'=>false,
             ),
         );
 }

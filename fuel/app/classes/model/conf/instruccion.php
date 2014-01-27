@@ -4,12 +4,36 @@ class Model_Conf_Instruccion extends \Orm\Model
 {
 	protected static $_properties = array(
 		'id',
-		'id_usuario',
-		'id_nivel',
-		'id_institucion',
-		'id_especializacion',
-		'id_titulo',
-		'registro_oficial',
+		'id_usuario'=>array(
+                    'data_type'=>'int',
+                    'label'=>'ID Usuario:',
+                    'validation'=>array('required'),
+                    ),
+		'id_nivel'=>array(
+                    'data_type'=>'int',
+                    'label'=>'Nivel de instrucción:',
+                    'validation'=>array('required'),
+                ),
+		'id_institucion'=>array(
+                    'data_type'=>'int',
+                    'label'=>'Institución',
+                    'validation'=>array('required'),
+                    ),
+		'id_especializacion'=>array(
+                    'data_type'=>'int',
+                    'label'=>'Especialización',
+                    'validation'=>array('required'),
+                ),
+		'id_titulo'=>array(
+                    'data_type'=>'int',
+                    'label'=>'Título',
+                    'validation'=>array('required'),
+                ),
+		'registro_oficial'=>array(
+                    'data_type'=>'int',
+                    'label'=>'Registro SENESCYT',
+                    'validation'=>array('required'),
+                ),
 		'created_at',
 		'updated_at',
 	);
@@ -26,16 +50,53 @@ class Model_Conf_Instruccion extends \Orm\Model
 	);
 	protected static $_table_name = 'conf_instrucciones';
         
-        protected static $be_longs = array(
+        
+        protected static $_belongs_to = array(
             'informacion_personals'=>array(
                 'key_from'=>'id_usuario',
                 'model_to'=>'Model_Informacion_Personal',
-                'key_to'=>'id',                
-            )
+                'key_to'=>'id',
+                'cascade_save'=>false,
+                'cascade_detele'=>false,
+            ),
+            
+            'conf_niveles'=>array(
+                'key_from'=>'id_nivel',
+                'model_to'=>'Model_Conf_Nivel',
+                'key_to'=>'id',
+                'cascade_save'=>false,
+                'cascade_detele'=>false,               
+            ),
+                
+            
+            'conf_instituciones'=>array(
+                'key_from'=>'id_institucion',
+                'model_to'=>'Model_Conf_Institucion',
+                'key_to'=>'id',
+                'cascade_save'=>false,
+                'cascade_detele'=>false,
+            ),
+            
+            
+            'conf_especializaciones'=>array(
+                'key_from'=>'id_especializacion',
+                'model_to'=>'Model_Conf_Especializacion',
+                'key_to'=>'id',
+                'cascade_save'=>false,
+                'cascade_detele'=>false,
+            ),
+            
+            'conf_titulos'=>array(
+                'key_from'=>'id_titulo',
+                'model_to'=>'Model_Conf_Titulo',
+                'key_to'=>'id',
+                'cascade_save'=>false,
+                'cascade_detele'=>false,
+            ),
+            
         );
         
-        
-        
+       
         
         
         
