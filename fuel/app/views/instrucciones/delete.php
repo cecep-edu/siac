@@ -5,4 +5,4 @@
 	<li class='<?php echo Arr::get($subnav, "view" ); ?>'><?php echo Html::anchor('instrucciones/view','View');?></li>
 
 </ul>
-<p>View</p>
+<p>Borrar</p>
