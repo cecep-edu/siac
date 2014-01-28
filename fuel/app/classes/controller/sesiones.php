@@ -21,6 +21,9 @@ class Controller_Sesiones extends Controller_Template
 
     public function action_login()
     {
+        
+       
+      
         // comprobar si ya está logeado
         if (\Auth::check())
         {
@@ -70,4 +73,6 @@ class Controller_Sesiones extends Controller_Template
         // redirect a la home
         \Response::redirect('/');
     }
+    
+   
 }
