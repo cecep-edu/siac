@@ -34,7 +34,7 @@
                 <legend>Registrate Aquí</legend>
 
                 <legend>Ingrese con su cuenta y clave</legend>
-                <?php echo Form::open('usuarios', array('class' => 'form-horizontal')); ?>
+                <?php echo Form::open('registrar', array('class' => 'form-horizontal')); ?>
                 <?php
                 echo Form::input('username', null, array('class' => 'form-control',
                     'required' => true,
