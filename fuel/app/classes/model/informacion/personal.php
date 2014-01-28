@@ -124,12 +124,22 @@ class Model_Informacion_Personal extends \Orm\Model {
             'mysql_timestamp' => false,
         ),
     );
+    
     protected static $_table_name = 'informacion_personals';
+    
     protected static $_belongs_to = array(
         'usuarios' => array(
             'model_to' => 'Model_Usuario',
             'key_from' => 'usuario_id',
             'key_to' => 'id',
+        ),
+    );
+    
+    protected static $_has_many = array(
+        'instrucciones'=> array(
+            'key_from'=>'id',
+            'model_to'=>'Model_Conf_Instruccion',
+            'key_to'=>'id_perfil',
         ),
     );
 

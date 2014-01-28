@@ -62,9 +62,9 @@ class Controller_Infopersonal extends Controller_Template {
             $this->template->messages = $fieldset->validation()->error();
         }
 
-        $view->set('content', $form->build(), false);
-        //$this->template->set('content', $form->build(), false);
-        $this->template->content =$view;
+        //$view->set('content', $form->build(), false);
+        $this->template->set('content', $form->build(), false);
+        //$this->template->content =$view;
     }
 
     public function action_edit() {

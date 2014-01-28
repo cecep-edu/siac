@@ -23,20 +23,24 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($instruccion as $instrucciones) : ?>
+            
+           
+            <?php foreach ($instrucciones as $instruccion) : ?>
+            
+            
                 <tr>
                     
-                    <td><?php echo $instrucciones['id']; ?></td>
-                    <td><?php echo $instrucciones['id_usuario']; ?></td>
-                    <td><?php echo $instrucciones['id_nivel']; ?></td>
-                    <td><?php echo $instrucciones['id_institucion']; ?></td>
-                    <td><?php echo $instrucciones['id_especializacion']; ?></td>
-                    <td><?php echo $instrucciones['id_titulo']; ?></td>
-                    <td><?php echo $instrucciones['registro_oficial']; ?></td>
+                    <td><?php echo $instruccion->id; ?></td>
+                    <td><?php echo $instruccion->id_perfil; ?></td>
+                    <td><?php echo $instruccion->id_nivel; ?></td>
+                    <td><?php echo $instruccion->id_institucion; ?></td>
+                    <td><?php echo $instruccion->id_especializacion; ?></td>
+                    <td><?php echo $instruccion->id_titulo; ?></td>
+                    <td><?php echo $instruccion->registro_oficial; ?></td>
                     
                     <td>
-        		<?php echo Html::anchor('instrucciones/edit/'.$instrucciones->id, 'Editar', array('class' => 'btn btn-default')); ?>
-                        <?php echo Html::anchor('instrucciones/delete/'.$instrucciones->id, 'Eliminar', array('class' => 'btn btn-primary', 'onclick' => "return confirm('¿Estas seguro?')")); ?>
+        		<?php echo Html::anchor('instrucciones/edit/'.$instruccion->id, 'Editar', array('class' => 'btn btn-default')); ?>
+                        <?php echo Html::anchor('instrucciones/delete/'.$instruccion->id, 'Eliminar', array('class' => 'btn btn-primary', 'onclick' => "return confirm('¿Estas seguro?')")); ?>
 
                     </td>
                 </tr>
