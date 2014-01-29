@@ -15,7 +15,7 @@ class Controller_Infopersonal extends Controller_Template {
         $usuario = \Auth::instance()->get_user_id(); //user[1]: es el id del usuario registrado.
         $data["subnav"] = array('create' => 'active');
         $this->template->title = 'Infopersonal &raquo; Create';
-        //$this->template->content = View::forge('infopersonal/create', $data);
+
         $view=View::forge('infopersonal/create', $data);
         $config = array(
             'path' => DOCROOT . 'uploads/',
@@ -28,8 +28,10 @@ class Controller_Infopersonal extends Controller_Template {
         $fieldset = Fieldset::forge()->add_model('Model_Informacion_Personal')->repopulate();
         $fieldset->set_config('form_attributes', array('enctype' => 'multipart/form-data'));
         $form = $fieldset->form();
+        $fieldset->add_after('ciudad', 'Pais', array('type'=>'text','class'=>'form-control'), array(), 'tipo_identificador');
+       
         $form->add('submit', '', array('type' => 'submit', 'value' => 'Crear', 'class' => 'btn btn-primary'));
-        //$form->add('files', 'Files', array('type' => 'file'));
+        
 
         if ($fieldset->validation()->run() == true) {
             $fields = $fieldset->validated();
@@ -42,7 +44,7 @@ class Controller_Infopersonal extends Controller_Template {
                 $personal->apellido = $fields['apellido'];
                 $personal->identificador = $fields['identificador'];
                 $personal->tipo_identificador = $fields['tipo_identificador'];
-                $personal->pais_id = 2; //$fields['pais_id']
+                $personal->pais_id = $fields['pais_id'];
                 $personal->ciudad_residencia_id = 2; //$fields['ciudad_residencia_id'];
                 $personal->direccion = $fields['direccion'];
                 $personal->telefono = $fields['telefono'];
@@ -62,9 +64,9 @@ class Controller_Infopersonal extends Controller_Template {
             $this->template->messages = $fieldset->validation()->error();
         }
 
-        $view->set('content', $form->build(), false);
-        //$this->template->set('content', $form->build(), false);
-        $this->template->content =$view;
+        //$view->set('content', $form->build(), false);
+        $this->template->set('content', $form->build(), false);
+        //$this->template->content =$view;
     }
 
     public function action_edit() {
@@ -86,9 +88,16 @@ class Controller_Infopersonal extends Controller_Template {
         $fieldset = Fieldset::forge()->add_model('Model_Informacion_Personal')->populate($personal);
         $fieldset->add('legend')->set_template('<legend>Perfil Profesional</legend>');
         $form = $fieldset->form();
+        
+        
         $fieldset->set_config('form_attributes', array('enctype' => 'multipart/form-data'));
         
          $form->add('foto_perfil','Foto',array('type'=>'image','src'=> '/uploads/'.$personal->ruta_foto));
+        
+         // $fieldset->add('pais_id','país',array('type'=>'text','class'=>"form-control")); 
+          //$fieldset->field('pais_id')->set_type('text');
+          //$form->add('search','',array('type'=>'text','class'=>"form-control" ));
+        
        
         $form->add('submit', '', array('type' => 'submit', 'value' => 'Actualizar', 'class' => 'btn btn-primary'));
        

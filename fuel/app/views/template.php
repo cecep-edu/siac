@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<title><?php echo $title; ?></title>
 	<?php echo Asset::css('bootstrap.css'); ?>
-  <?php echo Asset::css('siac.css'); ?>
+       <?php echo Asset::css('siac.css'); ?>
 
 
 </head>
@@ -80,6 +80,7 @@
 
 <?php echo Asset::js('jquery.js') ?>
 <?php echo Asset::js('bootstrap.js'); ?>
+<?php echo Asset::js('bootstrap-typeahead.js'); ?>
 <?php echo Asset::js('siac.js'); ?>
 
 </body>

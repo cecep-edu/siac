@@ -52,9 +52,7 @@ class Model_Informacion_Personal extends \Orm\Model {
         'pais_id' => array(
             'data_type' => 'int',
             'label' => 'País',
-            'form' => array('type' => 'select', 'class' => 'form-control',
-                'placeholder' => "Seleccione su País",
-                 'options' => array(1 => 'Ecuador', 2 => 'Colombia',3 => 'España',4 => 'Perú')
+            'form' => array('type' => 'hidden', 'class' => 'form-control',
             )
         ),
         'ciudad_residencia_id' => array(

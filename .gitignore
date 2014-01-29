@@ -17,6 +17,7 @@ build
 nbproject/
 /fuel/app/config/development/migrations.php
 fuel/app/cache
+public/uploads/*
 fuel/app/config/credentials.php
 *.swp
 

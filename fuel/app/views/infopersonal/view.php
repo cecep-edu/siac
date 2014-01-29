@@ -6,7 +6,7 @@
 
 <div class="container">
     <div class="row">
-
+       
         <div class="span3 pull-right">
             <p><a class="btn w101" href="#"><i class="icon-print"></i>Imprimir</a> <a class="btn w101" href="#"><i class="icon-download-alt"></i>Descargar</a></p>
         </div>
@@ -84,7 +84,7 @@
 
         </div>
     </div>
-   
+    
     <div class="row">
         <div class="pull-left">
             <p></p>
@@ -170,7 +170,7 @@
     </div>
    
   
-    
+    <input type="text" id="form_search" name="form_search" class="form-control"    />
 
     <hr>
 
