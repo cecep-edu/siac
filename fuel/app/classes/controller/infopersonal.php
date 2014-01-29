@@ -29,7 +29,7 @@ class Controller_Infopersonal extends Controller_Template {
         $fieldset->set_config('form_attributes', array('enctype' => 'multipart/form-data'));
         $form = $fieldset->form();
         $fieldset->add_after('pais', 'Pais', array('type'=>'text','class'=>'form-control'), array(), 'tipo_identificador');
-       
+        $fieldset->add_before('ciudad', 'Ciudad', array('type'=>'text','class'=>'form-control'), array(), 'direccion');
         $form->add('submit', '', array('type' => 'submit', 'value' => 'Crear', 'class' => 'btn btn-primary'));
         
 
@@ -45,7 +45,7 @@ class Controller_Infopersonal extends Controller_Template {
                 $personal->identificador = $fields['identificador'];
                 $personal->tipo_identificador = $fields['tipo_identificador'];
                 $personal->pais_id = $fields['pais_id'];
-                $personal->ciudad_residencia_id = 2; //$fields['ciudad_residencia_id'];
+                $personal->ciudad_residencia_id = $fields['ciudad_residencia_id'];
                 $personal->direccion = $fields['direccion'];
                 $personal->telefono = $fields['telefono'];
                 $personal->correo = $fields['correo'];
@@ -85,8 +85,13 @@ class Controller_Infopersonal extends Controller_Template {
         $path = $_SERVER['DOCUMENT_ROOT'];
 
         $personal = \Model_Informacion_Personal::query()->where('usuario_id', '=', $user[1])->get_one();
+        $pais=$personal->conf_paises;
+        $ciudad=$personal->conf_ciudades;
+        $nom=$ciudad->ciudad.' - '.$ciudad->conf_paises->nom_pais;
         $fieldset = Fieldset::forge()->add_model('Model_Informacion_Personal')->populate($personal);
         $fieldset->add('legend')->set_template('<legend>Perfil Profesional</legend>');
+        $fieldset->add_after('pais', 'País', array('type'=>'text','value'=>$pais->nom_pais,'class'=>'form-control'), array(), 'tipo_identificador');
+        $fieldset->add_before('ciudad', 'Ciudad', array('type'=>'text','value'=>$nom,'class'=>'form-control'), array(), 'direccion');
         $form = $fieldset->form();
         
         

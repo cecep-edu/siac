@@ -58,10 +58,7 @@ class Model_Informacion_Personal extends \Orm\Model {
         'ciudad_residencia_id' => array(
             'data_type' => 'int',
             'label' => 'Ciudad de Residencia',
-            'form' => array('type' => 'select', 'class' => 'form-control',
-                'placeholder' => "Seleccione su Ciudad",
-                 'options' => array(1 => 'Quito - Ecuador', 2 => 'Bogota - Colombia',3 => 'Madrid - España',4 => 'Lima - Perú')
-            )
+            'form' => array('type' => 'hidden', 'class' => 'form-control')
         ),
         'direccion' => array(
             'data_type' => 'string',
@@ -139,6 +136,18 @@ class Model_Informacion_Personal extends \Orm\Model {
             'model_to'=>'Model_Conf_Instruccion',
             'key_to'=>'id_perfil',
         ),
+    );
+    protected static $_has_one = array(
+        'conf_paises'=> array(
+            'key_from'=>'pais_id',
+            'model_to'=>'Model_Conf_Paise',
+            'key_to'=>'id',
+        ),
+          'conf_ciudades'=> array(
+            'key_from'=>'ciudad_residencia_id',
+            'model_to'=>'Model_Conf_Ciudade',
+            'key_to'=>'id',
+        )
     );
 
 }

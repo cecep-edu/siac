@@ -7,6 +7,7 @@ $(document).ready(function() {
 
 
     autocompletado('pais','pais_id','../paises/getpaises?');
+    autocompletado('ciudad','ciudad_residencia_id','../paises/getciudades?');
     
     
     

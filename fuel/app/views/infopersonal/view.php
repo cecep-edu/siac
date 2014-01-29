@@ -169,8 +169,7 @@
         </div>
     </div>
    
-  
-    <input type="text" id="form_search" name="form_search" class="form-control"    />
+ 
 
     <hr>
 
