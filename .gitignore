@@ -20,4 +20,4 @@ fuel/app/cache
 public/uploads/*
 fuel/app/config/credentials.php
 *.swp
-
+public/uploads/*

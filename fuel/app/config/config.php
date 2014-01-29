@@ -252,6 +252,7 @@ return array(
         'packages' => array(
             'orm',
             'auth',
+            
         ),
         /**
          * These modules are always loaded on Fuel's startup. You can specify them

@@ -4,7 +4,7 @@ class Model_Conf_Instruccion extends \Orm\Model
 {
 	protected static $_properties = array(
 		'id',
-		'id_usuario'=>array(
+		'id_perfil'=>array(
                     'data_type'=>'int',
                     'label'=>'ID Usuario:',
                     'validation'=>array('required'),
@@ -53,7 +53,7 @@ class Model_Conf_Instruccion extends \Orm\Model
         
         protected static $_belongs_to = array(
             'informacion_personals'=>array(
-                'key_from'=>'id_usuario',
+                'key_from'=>'id_perfil',
                 'model_to'=>'Model_Informacion_Personal',
                 'key_to'=>'id',
                 'cascade_save'=>false,

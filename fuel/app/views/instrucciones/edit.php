@@ -1,6 +1,6 @@
 <ul class="nav nav-pills">
-    <li class='<?php echo Arr::get($subnav, "index"); ?>'><?php echo Html::anchor('instrucciones/index', 'asdf'); ?></li>
-    <li class='<?php echo Arr::get($subnav, "create"); ?>'><?php echo Html::anchor('instrucciones/create', 'Create'); ?></li>
+    <li class='<?php echo Arr::get($subnav, "index"); ?>'><?php echo Html::anchor('instrucciones/index', 'Listado'); ?></li>
+    <li class='<?php echo Arr::get($subnav, "create"); ?>'><?php echo Html::anchor('instrucciones/create', 'Crear'); ?></li>
 </ul>
 
 
