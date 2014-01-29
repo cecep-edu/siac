@@ -5,30 +5,31 @@ $(document).ready(function() {
         $('.siac-message').alert('close');
     }, 5000);
 
-    var colors = ["red", "blue", "green", "yellow", "brown", "black"];
 
+    autocompletado('pais','pais_id','../paises/getpaises?');
     
-    $('#form_ciudad').typeahead({
-        source: [
-            {id: 1, name: 'Toronto'},
-            {id: 2, name: 'Montreal'},
-            {id: 3, name: 'New York'},
-            {id: 4, name: 'Buffalo'},
-            {id: 5, name: 'Boston'},
-            {id: 6, name: 'Columbus'},
-            {id: 7, name: 'Dallas'},
-            {id: 8, name: 'Vancouver'},
-            {id: 9, name: 'Seattle'},
-            {id: 10, name: 'Los Angeles'}
-        ],
-        display: 'Name',
-        valueField: 'id',
-         onSelect: function (item){//item.text 
-             //console.log(item);
-             $('#form_pais_id').val(item.value); 
-         }
+    
+    
+    
+    
+/**
+ * 
+ * @param {type} campo_nombre : id del campo temporal donde aparecen los paises
+ * @param {type} campo_id : campo de la tabla oculto donde se guarad el código.
+ * @param {type} url : la url de donde se llama el metodo que devuelve el json.
+ * @returns {undefined} : un listado de ciudades
+ */
+    function autocompletado(campo_nombre, campo_id, url) {
+        $('#form_'+campo_nombre).typeahead({
+            ajax: url,  //../paises/getpaises?
+            display: 'value',
+            valueField: 'id',
+            onSelect: function(item) {
+                $('#form_'+campo_id).val(item.value);
+            }
+        });
+    }
 
-    });
 
 
 });

@@ -28,7 +28,7 @@ class Controller_Infopersonal extends Controller_Template {
         $fieldset = Fieldset::forge()->add_model('Model_Informacion_Personal')->repopulate();
         $fieldset->set_config('form_attributes', array('enctype' => 'multipart/form-data'));
         $form = $fieldset->form();
-        $fieldset->add_after('ciudad', 'Pais', array('type'=>'text','class'=>'form-control'), array(), 'tipo_identificador');
+        $fieldset->add_after('pais', 'Pais', array('type'=>'text','class'=>'form-control'), array(), 'tipo_identificador');
        
         $form->add('submit', '', array('type' => 'submit', 'value' => 'Crear', 'class' => 'btn btn-primary'));
         
