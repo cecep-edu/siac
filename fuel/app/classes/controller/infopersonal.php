@@ -1,6 +1,15 @@
 <?php
 
 class Controller_Infopersonal extends Controller_Template {
+    
+     public function before() {
+        parent::before();
+        
+        if (!Auth::check()) {
+            \Session::set_flash('siac-message', array('danger' => 'Debes estar conectado para acceder a esa área.'));
+            \Response::redirect('/usuarios/login');
+        }
+    }
 
     public function action_index() {
         $usuario = \Auth::instance()->get_user_id(); //user[1]: es el id del usuario registrado.
