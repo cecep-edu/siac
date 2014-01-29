@@ -11,7 +11,7 @@
 
             <!--<a href="#Step2" data-toggle="tab"><span class="badge">2</span> Instrucción</a>-->
         </li>
-        <li><a href="#Step3" data-toggle="tab"><span class="badge">3</span> Experiencia laboral</a>
+        <li><a href="#instrucciones/index/" data-toggle="tab"><span class="badge">3</span> Experiencia laboral</a>
         </li>
         <li><a href="#Step4" data-toggle="tab"><span class="badge">4</span> Capacitación específica</a>
         <li><a href="#Step5" data-toggle="tab"><span class="badge">5</span> Conocimiento de idiomas</a>
