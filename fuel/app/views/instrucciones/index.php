@@ -9,7 +9,7 @@
 
 <div class="Instrucciones">
 
-    <table>    
+    <table class="table table-striped">    
         <thead>
             <tr>
                 <th><small><h5> Código </h5></small></th>
@@ -30,12 +30,11 @@
             
                 <tr>
                     
-                    <td><?php echo $instruccion->id; ?></td>
-                    <td><?php echo $instruccion->id_perfil; ?></td>
-                    <td><?php echo $instruccion->id_nivel; ?></td>
-                    <td><?php echo $instruccion->id_institucion; ?></td>
-                    <td><?php echo $instruccion->id_especializacion; ?></td>
-                    <td><?php echo $instruccion->id_titulo; ?></td>
+                    
+                    <td><?php echo $instruccion->conf_niveles->nombre; ?></td>
+                    <td><?php echo $instruccion->conf_instituciones->nombre; ?></td>
+                    <td><?php echo $instruccion->conf_especializaciones->nombre; ?></td>
+                    <td><?php echo $instruccion->conf_titulos->nombres; ?></td>
                     <td><?php echo $instruccion->registro_oficial; ?></td>
                     
                     <td>

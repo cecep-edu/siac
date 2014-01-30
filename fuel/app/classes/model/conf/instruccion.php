@@ -50,16 +50,7 @@ class Model_Conf_Instruccion extends \Orm\Model
 	);
 	protected static $_table_name = 'conf_instrucciones';
         
-        
-        protected static $_belongs_to = array(
-            'informacion_personals'=>array(
-                'key_from'=>'id_perfil',
-                'model_to'=>'Model_Informacion_Personal',
-                'key_to'=>'id',
-                'cascade_save'=>false,
-                'cascade_detele'=>false,
-            ),
-            
+        protected static $_has_one = array(
             'conf_niveles'=>array(
                 'key_from'=>'id_nivel',
                 'model_to'=>'Model_Conf_Nivel',
@@ -67,7 +58,6 @@ class Model_Conf_Instruccion extends \Orm\Model
                 'cascade_save'=>false,
                 'cascade_detele'=>false,               
             ),
-                
             
             'conf_instituciones'=>array(
                 'key_from'=>'id_institucion',
@@ -76,7 +66,6 @@ class Model_Conf_Instruccion extends \Orm\Model
                 'cascade_save'=>false,
                 'cascade_detele'=>false,
             ),
-            
             
             'conf_especializaciones'=>array(
                 'key_from'=>'id_especializacion',
@@ -94,6 +83,17 @@ class Model_Conf_Instruccion extends \Orm\Model
                 'cascade_detele'=>false,
             ),
             
+            
+        );
+        
+        protected static $_belongs_to = array(
+            'informacion_personals'=>array(
+                'key_from'=>'id_perfil',
+                'model_to'=>'Model_Informacion_Personal',
+                'key_to'=>'id',
+                'cascade_save'=>false,
+                'cascade_detele'=>false,
+            ),                        
         );
         
        

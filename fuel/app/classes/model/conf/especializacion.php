@@ -26,7 +26,7 @@ class Model_Conf_Especializacion extends \Orm\Model
         
 	protected static $_table_name = 'conf_especializaciones';
         
-        protected static $_has_many = array(
+        protected static $_belongs_to = array(
             'conf_instrucciones'=>array(
                 'key_from'=>'id',
                 'model_to'=>'Model_Conf_Instruccion',
