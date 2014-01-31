@@ -16,7 +16,7 @@
     <tbody>
         <?php foreach ($laborales as $laboral): ?>
             <tr>
-                <td><?php echo $laboral->empresa; ?></td>
+                <td><?php echo $laboral->empresa->nombre; ?></td>
                 <td><?php echo $laboral->cargo; ?></td>
                 <td><?php echo $laboral->tiempo; ?></td>
                 <td><?php echo $laboral->actividad; ?></td>

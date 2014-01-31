@@ -18,10 +18,14 @@ class Controller_Explaboral extends Controller_Template {
         $data["subnav"] = array('create' => 'active');
         $this->template->title = 'Explaboral &raquo; Create';
         $this->template->content = View::forge('explaboral/create', $data);
-
+        
+        $instituciones = Model_Conf_Institucion::query()->select('id', 'nombre', 'id_tpempresa')->get();
+        $instituciones = Arr::assoc_to_keyval($instituciones, 'id', 'nombre');
+       
         $personal = Model_Informacion_Personal::find_by_usuario_id($usuario[1]);
 
         $fieldset = Fieldset::forge()->add_model('Model_Explaboral')->repopulate();
+        $fieldset->field('id_empresa')->set_options($instituciones);
         $form = $fieldset->form();
         $form->add('submit', '', array('type' => 'submit', 'value' => 'Crear', 'class' => 'btn btn-primary'));
 
@@ -29,7 +33,7 @@ class Controller_Explaboral extends Controller_Template {
             $fields = $fieldset->validated();
 
             $laboral = new Model_Explaboral();
-            $laboral->empresa = $fields['empresa'];
+            $laboral->id_empresa = $fields['id_empresa'];
             $laboral->cargo = $fields['cargo'];
             $laboral->tiempo = $fields['tiempo'];
             $laboral->actividad = $fields['actividad'];

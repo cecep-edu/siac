@@ -4,12 +4,12 @@ class Model_Explaboral extends \Orm\Model {
 
     protected static $_properties = array(
         'id',
-        'empresa' => array(
-            'data_type' => 'string',
+        'id_empresa' => array(
+            'data_type' => 'int',
             'label' => ' Empresa',
             'validation' => array('required'),
             'form' => array(
-                'type' => 'text',
+                'type' => 'select',
                 'class' => 'form-control',
                 'placeholder' => "Nombre de la empresa"
             )
@@ -40,8 +40,8 @@ class Model_Explaboral extends \Orm\Model {
             'form' => array(
                 'type' => 'textarea',
                 'class' => 'form-control',
-                'rows'=> 6,
-                'cols'=>50,
+                'rows' => 6,
+                'cols' => 50,
                 'placeholder' => "Actividades realizadas"
             )
         ),
@@ -78,6 +78,11 @@ class Model_Explaboral extends \Orm\Model {
         'informacion_personal' => array(
             'model_to' => 'Model_Informacion_Personal',
             'key_from' => 'id_personal',
+            'key_to' => 'id',
+        ),
+        'empresa' => array(
+            'model_to' => 'Model_Conf_Institucion',
+            'key_from' => 'id_empresa',
             'key_to' => 'id',
         ),
     );
