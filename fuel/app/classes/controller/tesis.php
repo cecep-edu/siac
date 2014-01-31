@@ -55,7 +55,7 @@ class Controller_Tesis extends Controller_Template {
 
     public function action_edit($id = null) {
          $this->template->title = 'Tésis &raquo; Edit';
-        $tesis = Model_Tesi::find($id);
+        $tesis = Model_Tesi::find( Security::xss_clean($id));
         $ambitos = Model_Ambito::find('all');
         $instituciones = Model_Conf_Institucion::query()->select('id', 'nombre', 'id_tpempresa')->where('id_tpempresa', '!=', 3)->get();
 
@@ -89,7 +89,7 @@ class Controller_Tesis extends Controller_Template {
     }
 
     public function action_delete($id = null) {
-        $tesis = Model_Tesi::find($id);
+        $tesis = Model_Tesi::find( Security::xss_clean($id));
         $tesis->delete($id);
         \Session::set_flash('siac-message', array('sucess' => 'Tesis eliminado con éxito.'));
         \Response::redirect('tesis/index');

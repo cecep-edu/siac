@@ -58,7 +58,7 @@ class Controller_Proyecto extends Controller_Template {
         $personal = Model_Informacion_Personal::find_by_usuario_id($usuario[1]);
 
         $this->template->title = 'Proyecto &raquo; Edit';
-        $proyecto = Model_Proyecto::find($id);
+        $proyecto = Model_Proyecto::find( Security::xss_clean($id));
         $ambitos = Model_Ambito::find('all');
         $instituciones = Model_Conf_Institucion::query()->select('id', 'nombre', 'id_tpempresa')->where('id_tpempresa', '!=', 3)->get();
 
@@ -93,7 +93,7 @@ class Controller_Proyecto extends Controller_Template {
     }
 
     public function action_delete($id = null) {
-        $proyecto = Model_Proyecto::find($id);
+        $proyecto = Model_Proyecto::find( Security::xss_clean($id));
         $proyecto->delete();
         \Session::set_flash('siac-message', array('sucess' => 'Proyecto eliminado con éxito.'));
         \Response::redirect('proyecto/index');

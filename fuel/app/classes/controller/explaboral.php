@@ -18,10 +18,10 @@ class Controller_Explaboral extends Controller_Template {
         $data["subnav"] = array('create' => 'active');
         $this->template->title = 'Explaboral &raquo; Create';
         $this->template->content = View::forge('explaboral/create', $data);
-        
+
         $instituciones = Model_Conf_Institucion::query()->select('id', 'nombre', 'id_tpempresa')->get();
         $instituciones = Arr::assoc_to_keyval($instituciones, 'id', 'nombre');
-       
+
         $personal = Model_Informacion_Personal::find_by_usuario_id($usuario[1]);
 
         $fieldset = Fieldset::forge()->add_model('Model_Explaboral')->repopulate();
@@ -55,16 +55,19 @@ class Controller_Explaboral extends Controller_Template {
     public function action_edit($id = null) {
         $data["subnav"] = array('edit' => 'active');
         $this->template->title = 'Explaboral &raquo; Edit';
-
-        $laboral = Model_Explaboral::find($id);
+      
+        $laboral = Model_Explaboral::find( Security::xss_clean($id));
+        $instituciones = Model_Conf_Institucion::query()->select('id', 'nombre', 'id_tpempresa')->get();
+        $instituciones = Arr::assoc_to_keyval($instituciones, 'id', 'nombre');
 
         $fieldset = Fieldset::forge()->add_model('Model_Explaboral')->populate($laboral);
+        $fieldset->field('id_empresa')->set_options($instituciones);
         $form = $fieldset->form();
         $form->add('submit', '', array('type' => 'submit', 'value' => 'Actualizar', 'class' => 'btn btn-primary'));
         if ($fieldset->validation()->run() == true) {
             $fields = $fieldset->validated();
 
-            $laboral->empresa = $fields['empresa'];
+            $laboral->id_empresa = $fields['id_empresa'];
             $laboral->cargo = $fields['cargo'];
             $laboral->tiempo = $fields['tiempo'];
             $laboral->actividad = $fields['actividad'];
@@ -80,11 +83,8 @@ class Controller_Explaboral extends Controller_Template {
         $this->template->set('content', $form->build(), false);
     }
 
-    public function action_delete($id=null) {
-//        $data["subnav"] = array('view' => 'active');
-//        $this->template->title = 'Explaboral &raquo; View';
-//        $this->template->content = View::forge('explaboral/view', $data);
-        $laboral = Model_Explaboral::find($id);
+    public function action_delete($id = null) {
+        $laboral = Model_Explaboral::find(Security::xss_clean($id));
         $laboral->delete();
         \Session::set_flash('siac-message', array('sucess' => 'Experiencia laboral eliminado con éxito.'));
 

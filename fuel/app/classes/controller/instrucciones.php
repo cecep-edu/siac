@@ -9,9 +9,7 @@ class Controller_Instrucciones extends Controller_Template {
 
         $data["subnav"] = array('index' => 'active');
         $this->template->title = 'Instrucciones &raquo; Index';
-
-        
-        
+      
         $instrucciones = $perfil->instrucciones;
         
         //$nivel = $instrucciones-;

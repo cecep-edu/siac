@@ -66,7 +66,7 @@ class Controller_Histcapacitacion extends Controller_Template {
 
         $this->template->title = 'Histcapacitacion &raquo; Editr';
 
-        $capacitacion = Model_Histcapacitacion::find($id);
+        $capacitacion = Model_Histcapacitacion::find( Security::xss_clean($id));
 
         $tpcertificados = Model_Tipocertificado::find('all');
         $tpcapacitaciones = Model_Tpcapacitacion::find('all');
@@ -106,7 +106,7 @@ class Controller_Histcapacitacion extends Controller_Template {
     }
 
     public function action_delete($id = null) {
-        $capacitacion = Model_Histcapacitacion::find($id);
+        $capacitacion = Model_Histcapacitacion::find( Security::xss_clean($id));
         $capacitacion->delete();
         \Session::set_flash('siac-message', array('sucess' => 'Capacitación eliminado con éxito.'));
         \Response::redirect('histcapacitacion/index');

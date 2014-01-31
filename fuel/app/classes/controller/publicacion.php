@@ -58,7 +58,7 @@ class Controller_Publicacion extends Controller_Template {
 
     public function action_edit($id = null) {
         $this->template->title = 'Publicación; Editar';
-        $publicacion = Model_Publicacion::find($id);
+        $publicacion = Model_Publicacion::find( Security::xss_clean($id));
 
         $tproducciones = Model_Tproduccion::find('all');
         $instituciones = Model_Conf_Institucion::query()->select('id', 'nombre', 'id_tpempresa')->where('id_tpempresa', '=', 3)->get();
@@ -94,7 +94,7 @@ class Controller_Publicacion extends Controller_Template {
     }
 
     public function action_delete($id = null) {
-        $publicacion = Model_Publicacion::find($id);
+        $publicacion = Model_Publicacion::find( Security::xss_clean($id));
         $publicacion->delete();
         \Session::set_flash('siac-message', array('sucess' => 'Publicación eliminada con éxito.'));
         \Response::redirect('publicacion/index');

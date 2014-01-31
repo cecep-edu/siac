@@ -74,13 +74,14 @@ class Model_Explaboral extends \Orm\Model {
         ),
     );
     protected static $_table_name = 'explaborals';
+  
     protected static $_belongs_to = array(
         'informacion_personal' => array(
             'model_to' => 'Model_Informacion_Personal',
             'key_from' => 'id_personal',
             'key_to' => 'id',
         ),
-        'empresa' => array(
+         'empresa' => array(
             'model_to' => 'Model_Conf_Institucion',
             'key_from' => 'id_empresa',
             'key_to' => 'id',

@@ -19,7 +19,7 @@ class Controller_Paises extends Controller_Template {
 
     public function action_getpaises() {
 
-        $param = \Input::param('query');
+        $param =  Security::xss_clean(\Input::param('query'));
         $paises = \Model_Conf_Paise::query()->select('id', 'nom_pais')->where('nom_pais', 'like', $param . '%')->get();
         $data = array();
         foreach ($paises as $pais) {
@@ -30,7 +30,7 @@ class Controller_Paises extends Controller_Template {
     }
 
     public function action_getciudades() {
-        $param = \Input::param('query');
+        $param =  Security::xss_clean(\Input::param('query'));
         $ciudades = Model_Conf_Ciudade::query()->select('id','id_pais', 'ciudad')->where('ciudad', 'like', $param . '%')->get();
         $data = array();
         $pais=  new Model_Conf_Paise();
