@@ -146,6 +146,21 @@ class Model_Informacion_Personal extends \Orm\Model {
             'model_to'=>'Model_Histcapacitacion',
             'key_to'=>'id_personal',
         ),
+        'publicacion'=> array(
+            'key_from'=>'id',
+            'model_to'=>'Model_Publicacion',
+            'key_to'=>'id_personal',
+        ),
+        'proyecto'=> array(
+            'key_from'=>'id',
+            'model_to'=>'Model_Proyecto',
+            'key_to'=>'id_personal',
+        ),
+        'tesis'=> array(
+            'key_from'=>'id',
+            'model_to'=>'Model_Tesi',
+            'key_to'=>'id_personal',
+        ),
     );
     protected static $_has_one = array(
         'conf_paises'=> array(

@@ -107,13 +107,8 @@ class Controller_Histcapacitacion extends Controller_Template {
 
     public function action_delete($id = null) {
         $capacitacion = Model_Histcapacitacion::find($id);
-        try{
-             $capacitacion->delete();
-        }  catch (\Oil\Exception $e){
-            echo $e->getMessage();
-        }
-       
-        //\Session::set_flash('siac-message', array('sucess' => 'Capacitación eliminado con éxito.'));
+        $capacitacion->delete();
+        \Session::set_flash('siac-message', array('sucess' => 'Capacitación eliminado con éxito.'));
         \Response::redirect('histcapacitacion/index');
     }
 
