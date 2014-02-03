@@ -146,6 +146,11 @@ class Model_Informacion_Personal extends \Orm\Model {
             'model_to'=>'Model_Histcapacitacion',
             'key_to'=>'id_personal',
         ),
+        'idioma'=> array(
+            'key_from'=>'id',
+            'model_to'=>'Model_Idioma',
+            'key_to'=>'id_personal',
+        ),
         'publicacion'=> array(
             'key_from'=>'id',
             'model_to'=>'Model_Publicacion',

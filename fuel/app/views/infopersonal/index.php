@@ -13,7 +13,7 @@
                 <span class="badge">3</span> Experiencia laboral</a>
         </li>
         <li><a href="#Step4" data-toggle="tab" onclick="location.href = '../histcapacitacion/'"><span class="badge">4</span> Capacitación específica</a>
-        <li><a href="#Step5" data-toggle="tab"><span class="badge">5</span> Conocimiento de idiomas</a>      
+        <li><a href="#Step5" data-toggle="tab" onclick="location.href = '../idioma/'"><span class="badge">5</span> Conocimiento de idiomas</a>      
         <li><a href="#Step6" data-toggle="tab" onclick="location.href = '../publicacion/'"><span class="badge">6</span> Publicaciones.</a>
         <li><a href="#Step7" data-toggle="tab" onclick="location.href = '../proyecto/'"><span class="badge">7</span> Proyectos.</a>
         <li><a href="#Step8" data-toggle="tab" onclick="location.href = '../tesis/'"><span class="badge">8</span> Tesis.</a>
