@@ -45,14 +45,15 @@ class Model_Informacion_Personal extends \Orm\Model {
             'label' => 'Tipo de Documento',
             'form' => array('type' => 'select',
                 'class' => 'form-control',
-                'placeholder' => "Seleccione el tipo de documento",
-                'options' => array(1 => 'Cédula', 2 => 'Pasaporte')
+                //'placeholder' => "Seleccione el tipo de documento",
+                'options' => array(1 => 'Cédula', 2 => 'Pasaporte'),
+                'selected'=>'none',
             ),
         ),
         'pais_id' => array(
             'data_type' => 'int',
             'label' => 'País',
-            'form' => array('type' => 'hidden', 'class' => 'form-control',
+            'form' => array('type' => 'hidden', 'class' => 'form-control','autocomplete'=>'off',
             )
         ),
         'ciudad_residencia_id' => array(
@@ -137,13 +138,14 @@ class Model_Informacion_Personal extends \Orm\Model {
             'key_to'=>'id_perfil',
         ),
     );
+    
     protected static $_has_one = array(
         'conf_paises'=> array(
             'key_from'=>'pais_id',
             'model_to'=>'Model_Conf_Paise',
             'key_to'=>'id',
         ),
-          'conf_ciudades'=> array(
+        'conf_ciudades'=> array(
             'key_from'=>'ciudad_residencia_id',
             'model_to'=>'Model_Conf_Ciudade',
             'key_to'=>'id',

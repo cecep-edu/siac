@@ -23,15 +23,16 @@ class Model_Conf_Institucion extends \Orm\Model
 			'mysql_timestamp' => false,
 		),
 	);
+        
 	protected static $_table_name = 'conf_instituciones';
         
-        protected static $_belongs_to = array(
-            'conf_instrucciones'=>array(
-                'key_from'=>'id',
-                'model_to'=>'Model_Conf_Instruccion',
-                'key_to'=>'id_institucion',
-                'cascade_save'=>false,
-                'cascade_detele'=>false,
-            ),
-        );
+//        protected static $_belongs_to = array(
+//            'conf_instrucciones'=>array(
+//                'key_from'=>'id',
+//                'model_to'=>'Model_Conf_Instruccion',
+//                'key_to'=>'id_institucion',
+//                'cascade_save'=>false,
+//                'cascade_detele'=>false,
+//            ),
+//        );
 }

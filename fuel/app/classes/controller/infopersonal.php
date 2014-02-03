@@ -37,8 +37,10 @@ class Controller_Infopersonal extends Controller_Template {
         $fieldset = Fieldset::forge()->add_model('Model_Informacion_Personal')->repopulate();
         $fieldset->set_config('form_attributes', array('enctype' => 'multipart/form-data'));
         $form = $fieldset->form();
-        $fieldset->add_after('pais', 'Pais', array('type'=>'text','class'=>'form-control'), array(), 'tipo_identificador');
-        $fieldset->add_before('ciudad', 'Ciudad', array('type'=>'text','class'=>'form-control'), array(), 'direccion');
+        
+        //Agrega campos para autocompletado en la forma
+        $fieldset->add_after('pais', 'Pais', array('type'=>'text','class'=>'form-control','autocomplete'=>'off','placeholder' => "Escriba el nombre del país de nacimiento",), array(), 'tipo_identificador');
+        $fieldset->add_before('ciudad', 'Ciudad', array('type'=>'text','class'=>'form-control','autocomplete'=>'off','placeholder' => "Escriba la ciudad de residencia",), array(), 'direccion');        
         $form->add('submit', '', array('type' => 'submit', 'value' => 'Crear', 'class' => 'btn btn-primary'));
         
 

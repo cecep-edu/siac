@@ -7,15 +7,20 @@ $(document).ready(function() {
 
 
     autocompletado('pais', 'pais_id', '../paises/getpaises?');
-    autocompletado('ciudad', 'ciudad_residencia_id', '../paises/getciudades?');
+    autocompletado('ciudad', 'ciudad_residencia_id', '../ciudades/getciudades?');
+    
+    autocompletado('institucion','id_institucion','../instituciones/getinstituciones?');
+    autocompletado('especializacion','id_especializacion','../especializaciones/getespecializaciones?');
+    autocompletado('titulo','id_titulo','../titulos/gettitulos?');
 
     /**
      * 
      * @param {type} campo_nombre : id del campo temporal donde aparecen los paises
-     * @param {type} campo_id : campo de la tabla oculto donde se guarad el código.
+     * @param {type} campo_id : campo de la tabla oculto donde se guarada el código.
      * @param {type} url : la url de donde se llama el metodo que devuelve el json.
      * @returns {undefined} : un listado de ciudades
      */
+    
     function autocompletado(campo_nombre, campo_id, url) {
         $('#form_' + campo_nombre).typeahead({
             ajax: url, //../paises/getpaises?

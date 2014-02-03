@@ -20,6 +20,7 @@ class Model_Conf_Ciudade extends \Orm\Model {
         ),
     );
     protected static $_table_name = 'conf_ciudades';
+    
     protected static $_belongs_to = array(
         'conf_paises' => array(
             'key_from' => 'id_pais',
