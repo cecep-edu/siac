@@ -100,12 +100,12 @@ class Model_Informacion_Personal extends \Orm\Model {
                 'type' => 'file', 'class' => 'form-control')
         ),
         'created_at' => array(
-            'data_type' => 'Date',
+            'data_type' => 'int',
             'form' => array('type' => 'hidden', 'class' => 'form-control'
             )
         ),
         'updated_at' => array(
-            'data_type' => 'Date',
+            'data_type' => 'int',
             'form' => array('type' => 'hidden', 'class' => 'form-control'
             )
         ),
@@ -136,6 +136,36 @@ class Model_Informacion_Personal extends \Orm\Model {
             'key_from'=>'id',
             'model_to'=>'Model_Conf_Instruccion',
             'key_to'=>'id_perfil',
+        ),
+        'laboral'=> array(
+            'key_from'=>'id',
+            'model_to'=>'Model_Explaboral',
+            'key_to'=>'id_personal',
+        ),
+        'capacitacion'=> array(
+            'key_from'=>'id',
+            'model_to'=>'Model_Histcapacitacion',
+            'key_to'=>'id_personal',
+        ),
+        'idioma'=> array(
+            'key_from'=>'id',
+            'model_to'=>'Model_Idioma',
+            'key_to'=>'id_personal',
+        ),
+        'publicacion'=> array(
+            'key_from'=>'id',
+            'model_to'=>'Model_Publicacion',
+            'key_to'=>'id_personal',
+        ),
+        'proyecto'=> array(
+            'key_from'=>'id',
+            'model_to'=>'Model_Proyecto',
+            'key_to'=>'id_personal',
+        ),
+        'tesis'=> array(
+            'key_from'=>'id',
+            'model_to'=>'Model_Tesi',
+            'key_to'=>'id_personal',
         ),
     );
     

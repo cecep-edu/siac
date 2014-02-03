@@ -19,8 +19,10 @@ class Controller_Paises extends Controller_Template {
 
     public function action_getpaises() {
 
-        $param = \Input::param('query');        
-        $paises = \Model_Conf_Paise::query()->select('id', 'nom_pais')->where('nom_pais', 'like', $param . '%')->get();        
+
+        $param =  Security::xss_clean(\Input::param('query'));
+        $paises = \Model_Conf_Paise::query()->select('id', 'nom_pais')->where('nom_pais', 'like', $param . '%')->get();
+
         $data = array();
         foreach ($paises as $pais) {
             $data[] = array('id' => $pais->id, 'name' => $pais->nom_pais);
@@ -29,6 +31,21 @@ class Controller_Paises extends Controller_Template {
         return new \Response(json_encode($data), '200', $content_type);
     }
 
-    
+
+    public function action_getciudades() {
+        $param =  Security::xss_clean(\Input::param('query'));
+        $ciudades = Model_Conf_Ciudade::query()->select('id','id_pais', 'ciudad')->where('ciudad', 'like', $param . '%')->get();
+        $data = array();
+        $pais=  new Model_Conf_Paise();
+
+        foreach ($ciudades as $ciudad) {
+            
+            $nom = $ciudad->ciudad . ' - '.$ciudad->conf_paises->nom_pais ;
+            $data[] = array('id' => $ciudad->id, 'name' => $nom);
+        }
+        $content_type = array('Content-type' => 'application/json');
+        return new \Response(json_encode($data), '200', $content_type);
+    }
+
 
 }

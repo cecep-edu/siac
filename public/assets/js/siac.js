@@ -7,11 +7,16 @@ $(document).ready(function() {
 
 
     autocompletado('pais', 'pais_id', '../paises/getpaises?');
+
     autocompletado('ciudad', 'ciudad_residencia_id', '../ciudades/getciudades?');
     
     autocompletado('institucion','id_institucion','../instituciones/getinstituciones?');
     autocompletado('especializacion','id_especializacion','../especializaciones/getespecializaciones?');
     autocompletado('titulo','id_titulo','../titulos/gettitulos?');
+
+    autocompletado('ciudad', 'ciudad_residencia_id', '../paises/getciudades?');
+    autocompletado('idioma', 'id_lenguaje', '../idioma/getidiomas?');
+
 
     /**
      * 
