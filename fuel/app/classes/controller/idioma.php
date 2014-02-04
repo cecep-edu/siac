@@ -61,7 +61,6 @@ class Controller_Idioma extends Controller_Template {
 
         $fieldset = Fieldset::forge()->add_model('Model_Idioma')->populate($idioma);
 
-
         $fieldset->field('id_institucion')->set_options($instituciones);
         $form = $fieldset->form();
         $fieldset->add('id', 'id', array('type' => 'hidden', 'value' => \Input::post('id')));
