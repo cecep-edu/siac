@@ -64,37 +64,16 @@ class Controller_Idioma extends Controller_Template {
 
         $fieldset->field('id_institucion')->set_options($instituciones);
         $form = $fieldset->form();
-        $fieldset->add('id_idioma', 'id_idioma', array('type' => 'text', 'value' =>1));
+        $fieldset->add('id', 'id', array('type' => 'hidden', 'value' => \Input::post('id')));
 
+        $fieldset->add_before('idioma', 'Idioma', array('type' => 'text', 'autocomplete' => 'off', 'class' => 'form-control'), array(), 'id_nivelescrito');
+        $form->add('submit', '', array('type' => 'submit', 'value' => 'Actualizar', 'class' => 'btn btn-primary'));
 
-        if (\Input::post($id)) {
-            
-            $v = \Input::post($id);
-            if (isset($v['id'])) {
-                if (count($v) > 0) {  
-                    print_r($v).' valor 1';
-                } else {
-                    echo "se manda a guardar lsocampos";
-                }
-            }
-            
-            $fieldset->add_before('idioma', 'Idioma', array('type' => 'text', 'autocomplete' => 'off', 'class' => 'form-control'), array(), 'id_nivelescrito');
-            $form->add('submit', '', array('type' => 'submit', 'value' => 'Actualizar', 'class' => 'btn btn-primary'));
-
-
-
-            if ($fieldset->validation()->run() == true) {
+         if ($fieldset->validation()->run() == true) {
                
-
-                $fields = $fieldset->validated();
-                var_dump($fields);
-
-                var_dump($idioma);
-
-
-                die();
+                $fields = $fieldset->validated();              
+                $idioma = Model_Idioma::find($fields['id']);              
                 $idioma->id_nivelescrito = $fields['id_nivelescrito'];
-
                 $idioma->id_lenguaje = $fields['id_lenguaje'];
                 $idioma->id_niveloral = $fields['id_niveloral'];
                 $idioma->nombre_certificado = $fields['nombre_certificado'];
@@ -106,12 +85,6 @@ class Controller_Idioma extends Controller_Template {
                 $this->template->messages = $fieldset->validation()->error();
                 echo "no validado wil";
             }
-        } else {
-            echo "entro get";
-        }
-
-
-
 
         $this->template->set('content', $form->build(), false);
     }
