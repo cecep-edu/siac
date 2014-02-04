@@ -54,11 +54,9 @@ class Controller_Proyecto extends Controller_Template {
     }
 
     public function action_edit($id = null) {
-        $usuario = \Auth::instance()->get_user_id();
-        $personal = Model_Informacion_Personal::find_by_usuario_id($usuario[1]);
-
+       
         $this->template->title = 'Proyecto &raquo; Edit';
-        $proyecto = Model_Proyecto::find( Security::xss_clean($id));
+        $proyecto = Model_Proyecto::find(\Input::post($id));
         $ambitos = Model_Ambito::find('all');
         $instituciones = Model_Conf_Institucion::query()->select('id', 'nombre', 'id_tpempresa')->where('id_tpempresa', '!=', 3)->get();
 
@@ -70,11 +68,12 @@ class Controller_Proyecto extends Controller_Template {
         $fieldset->field('id_institucion')->set_options($instituciones);
 
         $form = $fieldset->form();
+        $fieldset->add('id', 'id', array('type' => 'hidden', 'value' => \Input::post('id')));
         $form->add('submit', '', array('type' => 'submit', 'value' => 'Actualziar', 'class' => 'btn btn-primary'));
 
         if ($fieldset->validation()->run() == true) {
             $fields = $fieldset->validated();
-
+             $proyecto = Model_Proyecto::find($fields['id']);
             $proyecto->nombre = $fields['nombre'];
             $proyecto->id_ambito = $fields['id_ambito'];
             $proyecto->id_institucion = $fields['id_institucion'];
@@ -93,7 +92,7 @@ class Controller_Proyecto extends Controller_Template {
     }
 
     public function action_delete($id = null) {
-        $proyecto = Model_Proyecto::find( Security::xss_clean($id));
+        $proyecto = Model_Proyecto::find(Security::xss_clean($id));
         $proyecto->delete();
         \Session::set_flash('siac-message', array('sucess' => 'Proyecto eliminado con éxito.'));
         \Response::redirect('proyecto/index');

@@ -54,8 +54,8 @@ class Controller_Tesis extends Controller_Template {
     }
 
     public function action_edit($id = null) {
-         $this->template->title = 'Tésis &raquo; Edit';
-        $tesis = Model_Tesi::find( Security::xss_clean($id));
+        $this->template->title = 'Tésis &raquo; Edit';
+        $tesis = Model_Tesi::find(\Input::post($id));
         $ambitos = Model_Ambito::find('all');
         $instituciones = Model_Conf_Institucion::query()->select('id', 'nombre', 'id_tpempresa')->where('id_tpempresa', '!=', 3)->get();
 
@@ -67,11 +67,12 @@ class Controller_Tesis extends Controller_Template {
         $fieldset->field('id_institucion')->set_options($instituciones);
 
         $form = $fieldset->form();
+        $fieldset->add('id', 'id', array('type' => 'hidden', 'value' => \Input::post('id')));
         $form->add('submit', '', array('type' => 'submit', 'value' => 'Actualziar', 'class' => 'btn btn-primary'));
 
         if ($fieldset->validation()->run() == true) {
             $fields = $fieldset->validated();
-            
+            $tesis = Model_Tesi::find($fields['id']);
             $tesis->id_ambito = $fields['id_ambito'];
             $tesis->id_institucion = $fields['id_institucion'];
             $tesis->titulo = $fields['titulo'];
@@ -89,7 +90,7 @@ class Controller_Tesis extends Controller_Template {
     }
 
     public function action_delete($id = null) {
-        $tesis = Model_Tesi::find( Security::xss_clean($id));
+        $tesis = Model_Tesi::find(Security::xss_clean($id));
         $tesis->delete($id);
         \Session::set_flash('siac-message', array('sucess' => 'Tesis eliminado con éxito.'));
         \Response::redirect('tesis/index');

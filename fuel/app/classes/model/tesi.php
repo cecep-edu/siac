@@ -12,6 +12,7 @@ class Model_Tesi extends \Orm\Model {
         'id_ambito' => array(
             'data_type' => 'int',
             'label' => 'Ámbito',
+            'validation' => array('required'),
             'form' => array(
                 'type' => 'select',
                 'class' => 'form-control',
@@ -38,6 +39,7 @@ class Model_Tesi extends \Orm\Model {
         'anio' => array(
             'data_type' => 'string',
             'label' => ' Año',
+            'validation' => array('required'),
             'form' => array('type' => 'text',
                 'class' => 'form-control',
                 'placeholder' => "año: 2014,etc"

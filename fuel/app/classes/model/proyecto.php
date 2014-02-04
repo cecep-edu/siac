@@ -32,6 +32,7 @@ class Model_Proyecto extends \Orm\Model {
         'id_institucion' => array(
             'data_type' => 'int',
             'label' => ' Institución',
+            'validation' => array('required'),
             'form' => array(
                 'type' => 'select',
                 'class' => 'form-control',
@@ -40,6 +41,7 @@ class Model_Proyecto extends \Orm\Model {
         'anio' => array(
             'data_type' => 'int',
             'label' => ' Año',
+            'validation' => array('required'),
             'form' => array(
                 'type' => 'text',
                 'class' => 'form-control',
@@ -49,6 +51,7 @@ class Model_Proyecto extends \Orm\Model {
         'duracion' => array(
             'data_type' => 'int',
             'label' => ' Duración ',
+            'validation' => array('required'),
             'form' => array(
                 'type' => 'text',
                 'class' => 'form-control',

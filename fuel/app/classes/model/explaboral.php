@@ -27,6 +27,7 @@ class Model_Explaboral extends \Orm\Model {
         'tiempo' => array(
             'data_type' => 'decimal',
             'label' => ' Tiempo',
+            'validation' => array('required'),
             'form' => array(
                 'type' => 'text',
                 'class' => 'form-control',
@@ -36,7 +37,7 @@ class Model_Explaboral extends \Orm\Model {
         'actividad' => array(
             'data_type' => 'string',
             'label' => ' Actividad',
-            'validation' => array('required'),
+            'validation' => array('required', 'max_length' => array(350), 'min_length' =>array(10)),
             'form' => array(
                 'type' => 'textarea',
                 'class' => 'form-control',

@@ -23,9 +23,12 @@
                 <td><?php echo $proyecto->anio; ?></td>
                 <td><?php echo $proyecto->duracion; ?></td>
                 <td>
-
-                    <?php echo Html::anchor('proyecto/edit/' . $proyecto->id, 'Editar', array('class' => 'btn btn-warning btn-xs')); ?>
-                    <?php echo Html::anchor('proyecto/delete/' . $proyecto->id, 'Eliminar', array('class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('¿Estas seguro?')")); ?>
+                    <form action="/proyecto/edit" method="post">
+                        <input type="hidden" id="id" name='id'  value="<?php echo $proyecto->id; ?>" />
+                        <input type="submit" value="Editar" class="btn btn-warning btn-xs" />
+                        <?php echo Html::anchor('proyecto/delete/' . $proyecto->id, 'Eliminar', array('class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('¿Estas seguro?')")); ?>
+                    </form>
+                    
                 </td>
             </tr>
         <?php endforeach; ?>
