@@ -1,16 +1,16 @@
 <ul class="nav nav-pills">
     <li class='<?php echo Arr::get($subnav, "index"); ?>'><?php echo Html::anchor('explaboral/index', 'Index'); ?></li>
     <li class='<?php echo Arr::get($subnav, "crear"); ?>'><?php echo Html::anchor('explaboral/create', 'Create'); ?></li>
-    
+
 </ul>
 
 <table class="table table-hover">
     <thead>
         <tr>
-            <th>Empresa</th>
-            <th>Cargo</th>
-            <th>Tiempo</th>
-            <th>Actividad</th>
+            <th class="col-sm-3">Empresa</th>
+            <th class="col-sm-2">Cargo</th>
+            <th class="col-sm-1">Tiempo</th>
+            <th class="col-sm-4">Actividad</th>
         </tr>
     </thead>
     <tbody>
@@ -21,9 +21,12 @@
                 <td><?php echo $laboral->tiempo; ?></td>
                 <td><?php echo $laboral->actividad; ?></td>
                 <td>
-                  
-                    <?php echo Html::anchor('explaboral/edit/' . $laboral->id , 'Editar', array('class' => 'btn btn-warning btn-xs')); ?>
-                    <?php echo Html::anchor('explaboral/delete/' . $laboral->id, 'Eliminar', array('class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('¿Estas seguro?')")); ?>
+                    <form action="/explaboral/edit" method="post">
+                        <input type="hidden" id="id" name='id'  value="<?php echo $laboral->id; ?>" />
+                        <input type="submit" value="Editar" class="btn btn-warning btn-xs" />
+                        <?php echo Html::anchor('explaboral/delete/' . $laboral->id, 'Eliminar', array('class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('¿Estas seguro?')")); ?>
+                    </form>
+                    
                 </td>
             </tr>
         <?php endforeach; ?>

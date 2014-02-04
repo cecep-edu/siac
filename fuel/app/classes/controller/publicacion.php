@@ -58,7 +58,7 @@ class Controller_Publicacion extends Controller_Template {
 
     public function action_edit($id = null) {
         $this->template->title = 'Publicación; Editar';
-        $publicacion = Model_Publicacion::find( Security::xss_clean($id));
+        $publicacion = Model_Publicacion::find(\Input::post($id));
 
         $tproducciones = Model_Tproduccion::find('all');
         $instituciones = Model_Conf_Institucion::query()->select('id', 'nombre', 'id_tpempresa')->where('id_tpempresa', '=', 3)->get();
@@ -71,11 +71,12 @@ class Controller_Publicacion extends Controller_Template {
         $fieldset->field('id_editorial')->set_options($instituciones);
 
         $form = $fieldset->form();
+        $fieldset->add('id', 'id', array('type' => 'hidden', 'value' => \Input::post('id')));
         $form->add('submit', '', array('type' => 'submit', 'value' => 'Actualizar', 'class' => 'btn btn-primary'));
 
         if ($fieldset->validation()->run() == true) {
             $fields = $fieldset->validated();
-
+            $publicacion = Model_Publicacion::find($fields['id']);
             $publicacion->id_tproduccion = $fields['id_tproduccion'];
             $publicacion->id_editorial = $fields['id_editorial'];
             $publicacion->titulo = $fields['titulo'];

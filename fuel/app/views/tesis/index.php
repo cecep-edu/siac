@@ -21,9 +21,13 @@
                 <td><?php echo $tes->institucion->nombre; ?></td>
                 <td><?php echo $tes->anio; ?></td>
                 <td>
-
-                    <?php echo Html::anchor('tesis/edit/' . $tes->id, 'Editar', array('class' => 'btn btn-warning btn-xs')); ?>
-                    <?php echo Html::anchor('tesis/delete/' . $tes->id, 'Eliminar', array('class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('¿Estas seguro?')")); ?>
+                    <form action="/tesis/edit" method="post">
+                        <input type="hidden" id="id" name='id'  value="<?php echo $tes->id; ?>" />
+                        <input type="submit" value="Editar" class="btn btn-warning btn-xs" />
+                        <?php echo Html::anchor('histcapacitacion/delete/' . $tes->id, 'Eliminar',
+                     array('class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('¿Estas seguro?')")); ?>
+                    </form>
+                  
                 </td>
             </tr>
         <?php endforeach; ?>

@@ -34,6 +34,7 @@ class Model_Histcapacitacion extends \Orm\Model {
         'anio' => array(
             'data_type' => 'int',
             'label' => ' Año',
+            'validation' => array('required'),
             'form' => array(
                 'type' => 'text',
                 'class' => 'form-control',
@@ -51,6 +52,7 @@ class Model_Histcapacitacion extends \Orm\Model {
         'duracion' => array(
             'data_type' => 'int',
             'label' => 'Duración',
+            'validation' => array('required'),
             'form' => array('type' => 'text',
                 'class' => 'form-control',
                 'placeholder' => "4 (horas)"

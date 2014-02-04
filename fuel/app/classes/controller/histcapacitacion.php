@@ -66,7 +66,7 @@ class Controller_Histcapacitacion extends Controller_Template {
 
         $this->template->title = 'Histcapacitacion &raquo; Editr';
 
-        $capacitacion = Model_Histcapacitacion::find( Security::xss_clean($id));
+        $capacitacion = Model_Histcapacitacion::find(\Input::post($id));
 
         $tpcertificados = Model_Tipocertificado::find('all');
         $tpcapacitaciones = Model_Tpcapacitacion::find('all');
@@ -84,9 +84,11 @@ class Controller_Histcapacitacion extends Controller_Template {
         $fieldset->field('id_institucion')->set_options($instituciones);
 
         $form = $fieldset->form();
+        $fieldset->add('id', 'id', array('type' => 'hidden', 'value' => \Input::post('id')));
         $form->add('submit', '', array('type' => 'submit', 'value' => 'Actualizar', 'class' => 'btn btn-primary'));
         if ($fieldset->validation()->run() == true) {
             $fields = $fieldset->validated();
+            $capacitacion = Model_Histcapacitacion::find($fields['id']);
 
             $capacitacion->nom_evento = $fields['nom_evento'];
             $capacitacion->id_institucion = $fields['id_institucion'];
@@ -106,7 +108,7 @@ class Controller_Histcapacitacion extends Controller_Template {
     }
 
     public function action_delete($id = null) {
-        $capacitacion = Model_Histcapacitacion::find( Security::xss_clean($id));
+        $capacitacion = Model_Histcapacitacion::find(Security::xss_clean($id));
         $capacitacion->delete();
         \Session::set_flash('siac-message', array('sucess' => 'Capacitación eliminado con éxito.'));
         \Response::redirect('histcapacitacion/index');

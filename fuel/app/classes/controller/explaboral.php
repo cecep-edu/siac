@@ -55,18 +55,20 @@ class Controller_Explaboral extends Controller_Template {
     public function action_edit($id = null) {
         $data["subnav"] = array('edit' => 'active');
         $this->template->title = 'Explaboral &raquo; Edit';
-      
-        $laboral = Model_Explaboral::find( Security::xss_clean($id));
+
+        $laboral = Model_Explaboral::find(\Input::post($id));
         $instituciones = Model_Conf_Institucion::query()->select('id', 'nombre', 'id_tpempresa')->get();
         $instituciones = Arr::assoc_to_keyval($instituciones, 'id', 'nombre');
 
         $fieldset = Fieldset::forge()->add_model('Model_Explaboral')->populate($laboral);
         $fieldset->field('id_empresa')->set_options($instituciones);
         $form = $fieldset->form();
+        $fieldset->add('id', 'id', array('type' => 'hidden', 'value' => \Input::post('id')));
         $form->add('submit', '', array('type' => 'submit', 'value' => 'Actualizar', 'class' => 'btn btn-primary'));
+
         if ($fieldset->validation()->run() == true) {
             $fields = $fieldset->validated();
-
+            $laboral = Model_Explaboral::find($fields['id']);
             $laboral->id_empresa = $fields['id_empresa'];
             $laboral->cargo = $fields['cargo'];
             $laboral->tiempo = $fields['tiempo'];
@@ -74,9 +76,12 @@ class Controller_Explaboral extends Controller_Template {
 
             if ($laboral->save()) {
                 \Response::redirect('explaboral/index');
+            }else{
+                 \Session::set_flash('siac-message', array('warning' => 'Los cambios no se han guardado.'));
             }
         } else {
             $this->template->messages = $fieldset->validation()->error();
+            
         }
 
 

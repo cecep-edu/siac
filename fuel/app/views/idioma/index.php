@@ -3,9 +3,7 @@
     <li class='<?php echo Arr::get($subnav, "create"); ?>'><?php echo Html::anchor('idioma/create', 'Create'); ?></li>
 
 </ul>
-<?php
-$niveles = array('1' => 'Básico','2'=>'Intermedio','3'=>'Avanzado');
-?>
+
 <table class="table table-hover">
     <thead>
         <tr>
@@ -29,6 +27,7 @@ $niveles = array('1' => 'Básico','2'=>'Intermedio','3'=>'Avanzado');
                     
                     <form action="/idioma/edit" method="post">
                         <input type="hidden" id="id" name='id'  value="<?php echo $idioma->id; ?>" />
+                        <input type="hidden"  name='lenguaje'  value="<?php echo $idioma->lenguaje->nombre; ?>" />
                         <input type="submit" value="Editar" class="btn btn-warning btn-xs" />
                          <?php echo Html::anchor('/idioma/delete/'.$idioma->id , 'Eliminar', array('class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('¿Estas seguro?')")); ?>
                     </form>
