@@ -55,28 +55,64 @@ class Controller_Idioma extends Controller_Template {
         $data["subnav"] = array('edit' => 'active');
         $this->template->title = 'Idoma &raquo; Edit';
 
-        $idioma = Model_Idioma::find(\Security::xss_clean($id));
+        $idioma = Model_Idioma::find(\Fuel\Core\Input::post($id));
         $instituciones = Model_Conf_Institucion::query()->select('id', 'nombre', 'id_tpempresa')->get();
         $instituciones = Arr::assoc_to_keyval($instituciones, 'id', 'nombre');
 
         $fieldset = Fieldset::forge()->add_model('Model_Idioma')->populate($idioma);
+
+
         $fieldset->field('id_institucion')->set_options($instituciones);
         $form = $fieldset->form();
-        $form->add('submit', '', array('type' => 'submit', 'value' => 'Actualizar', 'class' => 'btn btn-primary'));
-        if ($fieldset->validation()->run() == true) {
-            $fields = $fieldset->validated();
+        $fieldset->add('id_idioma', 'id_idioma', array('type' => 'text', 'value' =>1));
 
-            $idioma->id_nivelescrito = $fields['id_nivelescrito'];
-            $idioma->id_lenguaje = $fields['id_lenguaje'];
-            $idioma->id_niveloral = $fields['id_niveloral'];
-            $idioma->nombre_certificado = $fields['nombre_certificado'];
-            $idioma->id_institucion = $fields['id_institucion'];
-            if ($idioma->save()) {
-                \Response::redirect('idioma/index');
+
+        if (\Input::post($id)) {
+            
+            $v = \Input::post($id);
+            if (isset($v['id'])) {
+                if (count($v) > 0) {  
+                    print_r($v).' valor 1';
+                } else {
+                    echo "se manda a guardar lsocampos";
+                }
+            }
+            
+            $fieldset->add_before('idioma', 'Idioma', array('type' => 'text', 'autocomplete' => 'off', 'class' => 'form-control'), array(), 'id_nivelescrito');
+            $form->add('submit', '', array('type' => 'submit', 'value' => 'Actualizar', 'class' => 'btn btn-primary'));
+
+
+
+            if ($fieldset->validation()->run() == true) {
+               
+
+                $fields = $fieldset->validated();
+                var_dump($fields);
+
+                var_dump($idioma);
+
+
+                die();
+                $idioma->id_nivelescrito = $fields['id_nivelescrito'];
+
+                $idioma->id_lenguaje = $fields['id_lenguaje'];
+                $idioma->id_niveloral = $fields['id_niveloral'];
+                $idioma->nombre_certificado = $fields['nombre_certificado'];
+                $idioma->id_institucion = $fields['id_institucion'];
+                if ($idioma->save()) {
+                    \Response::redirect('idioma/index');
+                }
+            } else {
+                $this->template->messages = $fieldset->validation()->error();
+                echo "no validado wil";
             }
         } else {
-            $this->template->messages = $fieldset->validation()->error();
+            echo "entro get";
         }
+
+
+
+
         $this->template->set('content', $form->build(), false);
     }
 
@@ -97,7 +133,6 @@ class Controller_Idioma extends Controller_Template {
         }
         $content_type = array('Content-type' => 'application/json');
         return new \Response(json_encode($data), '200', $content_type);
-  
     }
 
 }

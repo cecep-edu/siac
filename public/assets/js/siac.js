@@ -16,6 +16,7 @@ $(document).ready(function() {
 
     autocompletado('ciudad', 'ciudad_residencia_id', '../paises/getciudades?');
     autocompletado('idioma', 'id_lenguaje', '../idioma/getidiomas?');
+   
 
 
     /**

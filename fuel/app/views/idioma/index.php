@@ -26,9 +26,13 @@ $niveles = array('1' => 'Básico','2'=>'Intermedio','3'=>'Avanzado');
                 <td><?php echo $idioma->nombre_certificado; ?></td>
                 <td><?php echo $idioma->institucion->nombre; ?></td>
                 <td>
-
-                    <?php echo Html::anchor('idioma/edit/' . $idioma->id, 'Editar', array('class' => 'btn btn-warning btn-xs')); ?>
-                    <?php echo Html::anchor('idioma/delete/' . $idioma->id, 'Eliminar', array('class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('¿Estas seguro?')")); ?>
+                    
+                    <form action="/idioma/edit" method="post">
+                        <input type="hidden" id="id" name='id'  value="<?php echo $idioma->id; ?>" />
+                        <input type="submit" value="Editar" class="btn btn-warning btn-xs" />
+                         <?php echo Html::anchor('/idioma/delete/'.$idioma->id , 'Eliminar', array('class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('¿Estas seguro?')")); ?>
+                    </form>
+                   
                 </td>
             </tr>
         <?php endforeach; ?>

@@ -12,11 +12,12 @@ class Controller_Instrucciones extends Controller_Template {
         $instrucciones = $perfil->instrucciones;
 
         if ($instrucciones === null) {
-            \Response::redirect('instrucciones/create');
+            \Response::redirect('/instrucciones/create');
         } else {
             $data["instrucciones"] = $instrucciones;
             $this->template->content = View::forge('instrucciones/index', $data);
         }
+         
     }
 
     public function action_create() {

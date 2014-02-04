@@ -7,6 +7,7 @@ class Model_Idioma extends \Orm\Model {
         'id_nivelescrito' => array(
             'data_type' => 'int',
             'label' => ' Nivel Escrito',
+            'validation' => array('required'),
             'form' => array(
                 'type' => 'select',
                 'class' => 'form-control',
@@ -25,6 +26,7 @@ class Model_Idioma extends \Orm\Model {
         'id_lenguaje' => array(
             'data_type' => 'int',
             'label' => ' Idiomas',
+            'validation' => array('required'),
             'form' => array(
                 'type' => 'hidden',
             ),
@@ -32,6 +34,7 @@ class Model_Idioma extends \Orm\Model {
         'nombre_certificado' => array(
             'data_type' => 'String',
             'label' => ' Certificado de Suficiencia',
+            'validation' => array('required'),
             'form' => array(
                 'type' => 'textarea',
                 'class' => 'form-control',

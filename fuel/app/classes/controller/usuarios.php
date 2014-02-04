@@ -65,7 +65,7 @@ class Controller_Usuarios extends Controller_Template {
 
     public function action_editar() {
         $data["usuario"] = Model_Usuario::find($this->param('id'));
-
+      
         $this->template->title = 'Editar &raquo; Usuario';
         $this->template->content = View::forge('usuarios/editar', $data);
     }
