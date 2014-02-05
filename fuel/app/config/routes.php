@@ -18,8 +18,6 @@ return array(
 	'usuarios/(?P<id>:num)/editar' => array(array('GET', new Route('usuarios/editar'))),
 	'usuarios/(?P<id>:num)/actualizar' => array(array('POST', new Route('usuarios/actualizar'))),
     
-//        'usuarios/(?P<username:string)/perfil' => 'informacion_perfonal/mostrar'
-
 	// sesiones
 	'usuarios/login' => array(
 		array('GET', new Route('sesiones/index')),

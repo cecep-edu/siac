@@ -51,7 +51,7 @@ return array(
      * Settings for the file finder cache (the Cache class has it's own config!)
      */
     'caching' => false,
-    'cache_lifetime' => 3600, // In Seconds
+    'cache_lifetime' => 3600, // In Seconds 3600
 
     /**
      * Callback to use with ob_start(), set this to 'ob_gzhandler' for gzip encoding of output
