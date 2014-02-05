@@ -12,7 +12,7 @@ class Model_Proyecto extends \Orm\Model {
         'nombre' => array(
             'data_type' => 'string',
             'label' => ' Denominación del Proyecto',
-            'validation' => array('required'),
+            'validation' => array('required','fulltexto'=>array(8)),
             'form' => array(
                 'type' => 'textarea',
                 'class' => 'form-control',
@@ -97,5 +97,14 @@ class Model_Proyecto extends \Orm\Model {
             'key_to' => 'id',
         ),
     );
+
+    public static function _validation_fulltexto($val, $options) {
+        if (strlen($val) < ((int) $options)) {
+            \Validation::active()->set_message('fulltexto', ':label debe tener al menos ' . $options . ' caracteres');
+            return false;
+        } else {
+            return true;
+        }
+    }
 
 }

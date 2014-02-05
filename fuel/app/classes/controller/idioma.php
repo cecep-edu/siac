@@ -9,7 +9,7 @@ class Controller_Idioma extends Controller_Template {
         $this->template->title = 'Idoma &raquo; Index';
 
         $idiomas = $personal->idioma;
-        $data['niveles']=array('1' => 'Básico','2'=>'Intermedio','3'=>'Avanzado');
+        $data['niveles'] = array('1' => 'Básico', '2' => 'Intermedio', '3' => 'Avanzado');
         $data['idiomas'] = $idiomas;
         $this->template->content = View::forge('idioma/index', $data);
     }
@@ -31,7 +31,6 @@ class Controller_Idioma extends Controller_Template {
 
         if ($fieldset->validation()->run() == true) {
             $fields = $fieldset->validated();
-
             $idioma = new Model_Idioma();
             $idioma->id_nivelescrito = $fields['id_nivelescrito'];
             $idioma->id_lenguaje = $fields['id_lenguaje'];
@@ -39,14 +38,12 @@ class Controller_Idioma extends Controller_Template {
             $idioma->nombre_certificado = $fields['nombre_certificado'];
             $idioma->id_institucion = $fields['id_institucion'];
             $idioma->id_personal = $personal->id;
-
             if ($idioma->save()) {
-
-                Session::set_flash('success', 'Se han guardado los cambios.');
                 \Response::redirect('idioma/index');
+                \Session::set_flash('siac-message', array('success' => 'Los cambios se han guardado.'));
             }
         } else {
-            Session::set_flash('error', 'Algunos campos faltan por rellenar.');
+            \Session::set_flash('siac-message', array('danger' => $fieldset->validation()->show_errors()));
         }
 
         $this->template->set('content', $form->build(), false);
@@ -61,7 +58,6 @@ class Controller_Idioma extends Controller_Template {
         $instituciones = Arr::assoc_to_keyval($instituciones, 'id', 'nombre');
 
         $fieldset = Fieldset::forge()->add_model('Model_Idioma')->populate($idioma);
-
 
         $fieldset->field('id_institucion')->set_options($instituciones);
         $form = $fieldset->form();
@@ -81,27 +77,29 @@ class Controller_Idioma extends Controller_Template {
             $idioma->id_institucion = $fields['id_institucion'];
             if ($idioma->save()) {
                 \Response::redirect('idioma/index');
+                \Session::set_flash('siac-message', array('success' => 'Los cambios se han guardado.'));
+            } else {
+                \Session::set_flash('siac-message', array('danger' => 'Los cambios no se han guardado.'));
             }
         } else {
-            $this->template->messages = $fieldset->validation()->error();
-          
+            $fieldset->repopulate();
+            $fields = $fieldset->validated();
+            if ($fields['submit'] != null) {
+                \Session::set_flash('siac-message', array('danger' => $fieldset->validation()->show_errors()));
+            }
         }
-
-
-
         $this->template->set('content', $form->build(), false);
     }
 
     public function action_delete($id = null) {
         $idioma = Model_Idioma::find(\Security::xss_clean($id));
         $idioma->delete();
-        \Session::set_flash('siac-message', array('sucess' => 'Idioma ha sido eliminado con éxito.'));
-
         \Response::redirect('/idioma');
+        \Session::set_flash('siac-message', array('success' => 'Idioma ha sido eliminado con éxito.'));
     }
 
     public function action_getIdiomas() {
-        $param = Security::xss_clean(\Input::param('query'));
+        $param = Security::xss_clean(\Input::param('query')); //limpio el parámetro
         $lenguajes = Model_Lenguaje::query()->select('id', 'nombre')->where('nombre', 'like', $param . '%')->get();
         $data = array();
         foreach ($lenguajes as $lenguaje) {

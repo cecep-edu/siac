@@ -43,18 +43,20 @@ class Controller_Proyecto extends Controller_Template {
             $proyecto->duracion = $fields['duracion'];
 
             if ($proyecto->save()) {
-                Session::set_flash('success', 'Se han guardado los cambios.');
                 \Response::redirect('proyecto/index');
+                \Session::set_flash('siac-message', array('success' => 'Los cambios se han guardado.'));
+            } else {
+                \Session::set_flash('siac-message', array('danger' => 'Los cambios no se han guardado.'));
             }
         } else {
-            Session::set_flash('error', 'Algunos campos faltan por rellenar.');
+            \Session::set_flash('siac-message', array('danger' => $fieldset->validation()->show_errors()));
         }
 
         $this->template->set('content', $form->build(), false);
     }
 
     public function action_edit($id = null) {
-       
+
         $this->template->title = 'Proyecto &raquo; Edit';
         $proyecto = Model_Proyecto::find(\Input::post($id));
         $ambitos = Model_Ambito::find('all');
@@ -73,7 +75,7 @@ class Controller_Proyecto extends Controller_Template {
 
         if ($fieldset->validation()->run() == true) {
             $fields = $fieldset->validated();
-             $proyecto = Model_Proyecto::find($fields['id']);
+            $proyecto = Model_Proyecto::find($fields['id']);
             $proyecto->nombre = $fields['nombre'];
             $proyecto->id_ambito = $fields['id_ambito'];
             $proyecto->id_institucion = $fields['id_institucion'];
@@ -81,11 +83,17 @@ class Controller_Proyecto extends Controller_Template {
             $proyecto->duracion = $fields['duracion'];
 
             if ($proyecto->save()) {
-                Session::set_flash('success', 'Se han guardado los cambios.');
                 \Response::redirect('proyecto/index');
+                \Session::set_flash('siac-message', array('success' => 'Los cambios se han guardado.'));
+            } else {
+                \Session::set_flash('siac-message', array('danger' => 'Los cambios no se han guardado.'));
             }
         } else {
-            Session::set_flash('error', 'Algunos campos faltan por rellenar.');
+            $fieldset->repopulate();
+            $fields = $fieldset->validated();
+            if ($fields['submit'] != null) {
+                \Session::set_flash('siac-message', array('danger' => $fieldset->validation()->show_errors()));
+            }
         }
 
         $this->template->set('content', $form->build(), false);
@@ -94,8 +102,8 @@ class Controller_Proyecto extends Controller_Template {
     public function action_delete($id = null) {
         $proyecto = Model_Proyecto::find(Security::xss_clean($id));
         $proyecto->delete();
-        \Session::set_flash('siac-message', array('sucess' => 'Proyecto eliminado con éxito.'));
         \Response::redirect('proyecto/index');
+        \Session::set_flash('siac-message', array('success' => 'Proyecto eliminado con éxito.'));
     }
 
 }

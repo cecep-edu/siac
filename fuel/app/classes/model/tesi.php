@@ -29,7 +29,7 @@ class Model_Tesi extends \Orm\Model {
         'titulo' => array(
             'data_type' => 'string',
             'label' => ' Título',
-            'validation' => array('required', 'max_length' => array(350), 'min_length' => array(2)),
+            'validation' => array('required', 'fulltexto'=>array(8)),
             'form' => array('type' => 'textarea',
                 'class' => 'form-control',
                 'rows' => 5,
@@ -84,5 +84,14 @@ class Model_Tesi extends \Orm\Model {
             'key_to' => 'id',
         ),
     );
+
+    public static function _validation_fulltexto($val, $options) {
+        if (strlen($val) < ((int) $options)) {
+            \Validation::active()->set_message('fulltexto', ':label debe tener al menos ' . $options . ' caracteres');
+            return false;
+        } else {
+            return true;
+        }
+    }
 
 }

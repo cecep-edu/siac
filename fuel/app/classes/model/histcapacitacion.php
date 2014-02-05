@@ -14,7 +14,7 @@ class Model_Histcapacitacion extends \Orm\Model {
         'nom_evento' => array(
             'data_type' => 'string',
             'label' => ' Evento',
-            'validation' => array('required'),
+            'validation' => array('required','fulltexto'=>array(10)),
             'form' => array(
                 'type' => 'textarea',
                 'class' => 'form-control',
@@ -95,7 +95,7 @@ class Model_Histcapacitacion extends \Orm\Model {
             'key_from' => 'id_personal',
             'key_to' => 'id',
         ),
-         'certificado' => array(
+        'certificado' => array(
             'key_from' => 'id_tpcertificado',
             'model_to' => 'Model_Tipocertificado',
             'key_to' => 'id',
@@ -111,5 +111,14 @@ class Model_Histcapacitacion extends \Orm\Model {
             'key_to' => 'id',
         ),
     );
+
+    public static function _validation_fulltexto($val, $options) {
+        if (strlen($val) < ((int) $options)) {
+            \Validation::active()->set_message('fulltexto', ':label debe tener al menos ' . $options . ' caracteres');
+            return false;
+        } else {
+            return true;
+        }
+    }
 
 }

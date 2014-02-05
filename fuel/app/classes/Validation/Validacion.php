@@ -11,8 +11,7 @@
  *
  * @author wilfo martel
  */
-class Validacion extends \Fuel\Core\Validation {
-
+ class Validacion extends \Fuel\Core\Validation {
     //put your code here
 
     /**
@@ -43,6 +42,15 @@ class Validacion extends \Fuel\Core\Validation {
                 return false;
         } else {
             return false;
+        }
+    }
+
+    public static function _validation_fulltexto($val,$options) {
+        if (strlen($val) < ((int)$options)) {
+           \Validation::active()->set_message('fulltexto', ':label debe tener al menos '.$options.' caracteres');
+            return false;
+        } else {
+            return true;
         }
     }
 

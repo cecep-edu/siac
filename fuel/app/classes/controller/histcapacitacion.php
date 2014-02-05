@@ -15,17 +15,12 @@ class Controller_Histcapacitacion extends Controller_Template {
     public function action_create() {
         $usuario = \Auth::instance()->get_user_id();
         $personal = Model_Informacion_Personal::find_by_usuario_id($usuario[1]);
-
-
         $this->template->title = 'Histcapacitacion &raquo; Create';
-
         $tpcertificados = Model_Tipocertificado::find('all');
         $tpcapacitaciones = Model_Tpcapacitacion::find('all');
         $instituciones = Model_Conf_Institucion::query()->select('id', 'nombre', 'id_tpempresa')->get();
 
-
         $tpcertificados = \Arr::assoc_to_keyval($tpcertificados, 'id', 'nombre');
-
         $tpcapacitaciones = \Arr::assoc_to_keyval($tpcapacitaciones, 'id', 'nom_capa');
         $instituciones = Fuel\Core\Arr::assoc_to_keyval($instituciones, 'id', 'nombre');
 
@@ -50,13 +45,11 @@ class Controller_Histcapacitacion extends Controller_Template {
             $capacitacion->id_tpcertificado = $fields['id_tpcertificado'];
 
             if ($capacitacion->save()) {
-
-                Session::set_flash('success', 'Se han guardado los cambios.');
                 \Response::redirect('histcapacitacion/index');
+                \Session::set_flash('siac-message', array('success' => 'Los cambios se han guardado.'));
             }
         } else {
-            // $this->template->messages = $fieldset->validation()->error();
-            Session::set_flash('error', 'Algunos campos faltan por rellenar.');
+            \Session::set_flash('siac-message', array('danger' => $fieldset->validation()->show_errors()));
         }
 
         $this->template->set('content', $form->build(), false);
@@ -99,9 +92,16 @@ class Controller_Histcapacitacion extends Controller_Template {
 
             if ($capacitacion->save()) {
                 \Response::redirect('histcapacitacion/index');
+                \Session::set_flash('siac-message', array('success' => 'Los cambios se han guardado.'));
+            } else {
+                \Session::set_flash('siac-message', array('danger' => 'Los cambios no se han guardado.'));
             }
         } else {
-            $this->template->messages = $fieldset->validation()->error();
+            $fieldset->repopulate();
+            $fields = $fieldset->validated();
+            if ($fields['submit'] != null) {
+                \Session::set_flash('siac-message', array('danger' => $fieldset->validation()->show_errors()));
+            }
         }
 
         $this->template->set('content', $form->build(), false);
@@ -110,8 +110,8 @@ class Controller_Histcapacitacion extends Controller_Template {
     public function action_delete($id = null) {
         $capacitacion = Model_Histcapacitacion::find(Security::xss_clean($id));
         $capacitacion->delete();
-        \Session::set_flash('siac-message', array('sucess' => 'Capacitación eliminado con éxito.'));
         \Response::redirect('histcapacitacion/index');
+        \Session::set_flash('siac-message', array('sucess' => 'Capacitación eliminado con éxito.'));
     }
 
 }

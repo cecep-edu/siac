@@ -23,30 +23,26 @@ class Controller_Explaboral extends Controller_Template {
         $instituciones = Arr::assoc_to_keyval($instituciones, 'id', 'nombre');
 
         $personal = Model_Informacion_Personal::find_by_usuario_id($usuario[1]);
-
         $fieldset = Fieldset::forge()->add_model('Model_Explaboral')->repopulate();
         $fieldset->field('id_empresa')->set_options($instituciones);
+
         $form = $fieldset->form();
         $form->add('submit', '', array('type' => 'submit', 'value' => 'Crear', 'class' => 'btn btn-primary'));
 
         if ($fieldset->validation()->run() == true) {
             $fields = $fieldset->validated();
-
             $laboral = new Model_Explaboral();
             $laboral->id_empresa = $fields['id_empresa'];
             $laboral->cargo = $fields['cargo'];
             $laboral->tiempo = $fields['tiempo'];
             $laboral->actividad = $fields['actividad'];
             $laboral->id_personal = $personal->id;
-
             if ($laboral->save()) {
-
-                Session::set_flash('success', 'Se han guardado los cambios.');
                 \Response::redirect('explaboral/index');
+                \Session::set_flash('siac-message', array('success' => 'Los cambios se han guardado.'));
             }
         } else {
-            // $this->template->messages = $fieldset->validation()->error();
-            Session::set_flash('error', 'Algunos campos faltan por rellenar.');
+            \Session::set_flash('siac-message', array('danger' => $fieldset->validation()->show_errors()));
         }
 
         $this->template->set('content', $form->build(), false);
@@ -64,45 +60,41 @@ class Controller_Explaboral extends Controller_Template {
         $fieldset = Fieldset::forge()->add_model('Model_Explaboral')->populate($laboral);
         $fieldset->field('id_empresa')->set_options($instituciones);
 
-
         $form = $fieldset->form();
         $fieldset->add('id', 'id', array('type' => 'hidden', 'value' => \Input::post('id')));
         $form->add('submit', '', array('type' => 'submit', 'value' => 'Actualizar', 'class' => 'btn btn-primary'));
 
-       
-//           var_dump($fieldset->error_messages());
-            if ($fieldset->validation()->run() == true) {
-                $fields = $fieldset->validated();
-                echo "entro fieldset";
-                $laboral = Model_Explaboral::find($fields['id']);
-                $laboral->id_empresa = $fields['id_empresa'];
-                $laboral->cargo = $fields['cargo'];
-                $laboral->tiempo = $fields['tiempo'];
-                $laboral->actividad = $fields['actividad'];
 
-                if ($laboral->save()) {
-                    echo "entro al save";
-                    \Response::redirect('explaboral/index');
-                } else {
-                    echo "entro fieldset";
-                    \Session::set_flash('siac-message', array('warning' => 'Los cambios no se han guardado.'));
-                }
+        if ($fieldset->validation()->run() == true) {
+            $fields = $fieldset->validated();
+
+            $laboral = Model_Explaboral::find($fields['id']);
+            $laboral->id_empresa = $fields['id_empresa'];
+            $laboral->cargo = $fields['cargo'];
+            $laboral->tiempo = $fields['tiempo'];
+            $laboral->actividad = $fields['actividad'];
+
+            if ($laboral->save()) {
+                \Response::redirect('explaboral/index');
+                \Session::set_flash('siac-message', array('success' => 'Los cambios se han guardado.'));
             } else {
-                  $fieldset->repopulate();               
+                \Session::set_flash('siac-message', array('danger' => 'Los cambios no se han guardado.'));
             }
-        
-
-
-
+        } else {
+            $fieldset->repopulate();
+            $fields = $fieldset->validated();
+            if ($fields['submit'] != null) {
+                \Session::set_flash('siac-message', array('danger' => $fieldset->validation()->show_errors()));
+            }
+        }
         $this->template->set('content', $form->build(), false);
     }
 
     public function action_delete($id = null) {
         $laboral = Model_Explaboral::find(Security::xss_clean($id));
         $laboral->delete();
-        \Session::set_flash('siac-message', array('sucess' => 'Experiencia laboral eliminado con éxito.'));
-
         \Response::redirect('/explaboral');
+        \Session::set_flash('siac-message', array('success' => 'Experiencia laboral eliminado con éxito.'));
     }
 
 }

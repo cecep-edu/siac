@@ -43,11 +43,13 @@ class Controller_Tesis extends Controller_Template {
             $tesis->anio = $fields['anio'];
 
             if ($tesis->save()) {
-                Session::set_flash('success', 'Se han guardado los cambios.');
                 \Response::redirect('tesis/index');
+                \Session::set_flash('siac-message', array('success' => 'Los cambios se han guardado.'));
+            } else {
+                \Session::set_flash('siac-message', array('danger' => 'Los cambios no se han guardado.'));
             }
         } else {
-            Session::set_flash('error', 'Algunos campos faltan por rellenar.');
+            \Session::set_flash('siac-message', array('danger' => $fieldset->validation()->show_errors()));
         }
 
         $this->template->set('content', $form->build(), false);
@@ -79,11 +81,17 @@ class Controller_Tesis extends Controller_Template {
             $tesis->anio = $fields['anio'];
 
             if ($tesis->save()) {
-                Session::set_flash('success', 'Se han guardado los cambios.');
                 \Response::redirect('tesis/index');
+                \Session::set_flash('siac-message', array('success' => 'Los cambios se han guardado.'));
+            } else {
+                \Session::set_flash('siac-message', array('danger' => 'Los cambios no se han guardado.'));
             }
         } else {
-            Session::set_flash('error', 'Algunos campos faltan por rellenar.');
+            $fieldset->repopulate();
+            $fields = $fieldset->validated();
+            if ($fields['submit'] != null) {
+                \Session::set_flash('siac-message', array('danger' => $fieldset->validation()->show_errors()));
+            }
         }
 
         $this->template->set('content', $form->build(), false);
@@ -92,8 +100,8 @@ class Controller_Tesis extends Controller_Template {
     public function action_delete($id = null) {
         $tesis = Model_Tesi::find(Security::xss_clean($id));
         $tesis->delete($id);
-        \Session::set_flash('siac-message', array('sucess' => 'Tesis eliminado con éxito.'));
         \Response::redirect('tesis/index');
+         \Session::set_flash('siac-message', array('success' => 'Tesis eliminada con éxito.'));
     }
 
 }
