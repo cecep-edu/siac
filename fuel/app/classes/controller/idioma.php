@@ -84,6 +84,7 @@ class Controller_Idioma extends Controller_Template {
             }
         } else {
             $this->template->messages = $fieldset->validation()->error();
+          
         }
 
 

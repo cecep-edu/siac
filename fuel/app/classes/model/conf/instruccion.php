@@ -37,7 +37,7 @@ class Model_Conf_Instruccion extends \Orm\Model {
         'registro_oficial' => array(
             'data_type' => 'int',
             'label' => 'Registro SENESCYT',
-            'validation' => array('required'),
+            'validation' => array('required','max_length' => array(5)),
             'form' => array('class' => 'form-control'),
         ),
         'created_at' => array(

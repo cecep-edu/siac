@@ -66,6 +66,7 @@ class Controller_Instrucciones extends Controller_Template {
             }
         } else {
             $this->template->messages = $fieldset->validation()->error();
+              \Session::set_flash('siac-message', array('warning' => $fieldset->validation()->error()));
         }
         $this->template->set('content', $form->build(), false);
     }
