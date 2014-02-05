@@ -27,13 +27,19 @@
                     <td><?php echo $instruccion->conf_titulos->nombres; ?></td>
                     <td><?php echo $instruccion->registro_oficial; ?></td>
                     <td>
-                        <?php echo Html::anchor('/instrucciones/edit/' . $instruccion->id, 'Editar', array('class' => 'btn btn-primary btn-sm')); ?>
-                        <?php echo Html::anchor('/instrucciones/delete/' . $instruccion->id, 'Eliminar', array('class' => 'btn btn-default btn-sm', 'onclick' => "return confirm('¿Estas seguro?')")); ?>
+                        <?php //echo Html::anchor('/instrucciones/edit/' . $instruccion->id, 'Editar', array('class' => 'btn btn-primary btn-sm')); ?>
+                        <?php //echo Html::anchor('/instrucciones/delete/' . $instruccion->id, 'Eliminar', array('class' => 'btn btn-default btn-sm', 'onclick' => "return confirm('¿Estas seguro?')")); ?>
                         <form action="/instrucciones/edit" method="post">
-                            <input type="hidden" id="id" name='id' value="<?php echo $instruccion->id; ?>" />
-                            <input type="submit" value="Editar"   />
+                            <input type="hidden" id="id" name="id" value="<?php echo $instruccion->id; ?>" />
+                            <input type="hidden" id="nivel" name="nivel" value="<?php echo $instruccion->conf_niveles->nombre; ?>"/>
+                            <input type="hidden" id="institucion" name="institucion" value="<?php echo $instruccion->conf_instituciones->nombre; ?>"/>
+                            <input type="hidden" id="especializacion" name="especializacion" value="<?php echo $instruccion->conf_especializaciones->nombre; ?>"/>
+                            <input type="hidden" id="titulo" name="titulo" value="<?php echo $instruccion->conf_titulos->nombres; ?>"/>
+                            
+                            <input type="submit" value="Editar" class="btn btn-primary btn-sm active" />
+                            
                             <?php echo Html::anchor('/instrucciones/delete/' . $instruccion->id, 'Eliminar', array('onclick' => "return confirm('¿Estas seguro?')")); ?>
-                        </form>
+                        </form>                        
                     </td>
                 </tr>
                 <?php
