@@ -28,7 +28,7 @@ class Controller_Instrucciones extends Controller_Template {
         $data["subnav"] = array('create' => 'active');
         $this->template->title = 'Instrucciones &raquo; Create';
         $this->template->content = View::forge('instrucciones/create', $data);
-        
+
         //Se cargan todos los niveles disponibles, se convierte en array y carga a la lista
         $niveles = Model_Conf_Nivel::find('all');
         $niveles = \Fuel\Core\Arr::assoc_to_keyval($niveles, 'id', 'nombre');
@@ -39,7 +39,7 @@ class Controller_Instrucciones extends Controller_Template {
         $fieldset->field('id_nivel')->set_options($niveles);
 
         $form = $fieldset->form();
-        
+
         //Se añaden cajas de texto para el autocompletado en la forma
         $fieldset->add_after('institucion', 'Institucion', array('type' => 'text', 'class' => 'form-control', 'autocomplete' => 'off', 'placeholder' => "Escriba el nombre de la institución educativa",), array(), 'id_nivel');
         $fieldset->add_after('especializacion', 'Especializacion', array('type' => 'text', 'class' => 'form-control', 'autocomplete' => 'off', 'placeholder' => "Escriba la especialización",), array(), 'institucion');
@@ -49,7 +49,7 @@ class Controller_Instrucciones extends Controller_Template {
         $form->add('cancelar', '', array('type' => 'button', 'value' => 'Cancelar', 'class' => 'btn btn-default btn-sm', 'onclick' => "location.href='http://siac.iaen/infopersonal/index'"));
 
         $instruccion = new Model_Conf_Instruccion();
-        
+
         //Guarda el nuevo registro si los datos pasan la validación
         if ($fieldset->validation()->run() == true) {
             $fields = $fieldset->validated();
@@ -61,13 +61,13 @@ class Controller_Instrucciones extends Controller_Template {
             $instruccion->id_titulo = $fields['id_titulo'];
             $instruccion->registro_oficial = $fields['registro_oficial'];
             if ($instruccion->save()) {
+                \Session::set_flash('siac-message', array('success' => 'Los cambios se han guardado.'));
                 \Response::redirect('instrucciones/index');
             } else {
-                $this->template->messages = "No se ha n podido guardar los datos. Intente nuevamente";
+                \Session::set_flash('siac-message', array('danger' => $fieldset->validation()->show_errors()));
             }
         } else {
-            $this->template->messages = $fieldset->validation()->error();
-            \Session::set_flash('siac-message', array('warning' => $fieldset->validation()->error()));
+            \Session::set_flash('siac-message', array('danger' => $fieldset->validation()->show_errors()));
         }
         $this->template->set('content', $form->build(), false);
     }
@@ -93,7 +93,7 @@ class Controller_Instrucciones extends Controller_Template {
         $fieldset->add_after('especializacion', 'Especializacion', array('type' => 'text', 'class' => 'form-control', 'autocomplete' => 'off', 'placeholder' => "Escriba la especialización",), array(), 'institucion');
         $fieldset->add_after('titulo', 'Titulo', array('type' => 'text', 'class' => 'form-control', 'autocomplete' => 'off', 'placeholder' => "Escriba el título obtenido",), array(), 'especializacion');
 
-        $form->add('aceptar', '', array('type' => 'submit', 'value' => 'Guardar', 'class' => 'btn medium primary'));
+        $form->add('submit', 'Aceptar', array('type' => 'submit', 'value' => 'Guardar', 'class' => 'btn medium primary'));
         $form->add('cancelar', '', array('type' => 'submit', 'value' => 'Cancelar', 'class' => 'btn medium primary', 'action' => '/infopersonal/index'));
 
         //Se cargan todos los niveles disponibles, se convierte en array y carga a la lista
@@ -119,25 +119,27 @@ class Controller_Instrucciones extends Controller_Template {
             $instruccion->registro_oficial = $fields['registro_oficial'];
 
             if ($instruccion->save()) {
+                \Session::set_flash('siac-message', array('success' => 'Los cambios se han guardado.'));
                 \Response::redirect('instrucciones/index');
             } else {
-                \Session::set_flash('siac-message', array('sucess' => 'No se han podido guardar los datos. Intente nuevamente'));                
+                \Session::set_flash('siac-message', array('danger' => 'Los cambios no se han guardado.'));
             }
         } else {
-            //$this->template->messages = $fieldset->validation()->error();
-                //En caso de que los datos ingresados no se validen se redibuaja la forma manteniendo los datos
-                $fieldset->repopulate();
+            $fieldset->repopulate();
+            $fields = $fieldset->validated();
+            if ($fields['submit'] != null) {
+                \Session::set_flash('siac-message', array('danger' => $fieldset->validation()->show_errors()));
+            }
         }
         $this->template->set('content', $form->build(), false);
     }
-     
 
     public function action_delete($id = null) {
 
         $instruccion = \Model_Conf_Instruccion::find($id);
         $instruccion->delete();
         // Informar al usuario de que la eliminación de usuario fué correcta
-        \Session::set_flash('siac-message', array('sucess' => 'Usuario eliminado con éxito.'));
+        \Session::set_flash('siac-message', array('success' => 'Instrucción ha sido eliminado con éxito.'));
         \Response::redirect('/instrucciones/index');
     }
 

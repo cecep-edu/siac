@@ -16,7 +16,7 @@ class Model_Informacion_Personal extends \Orm\Model {
         'nombre' => array(
             'data_type' => 'string',
             'label' => ' Nombre',
-            'validation' => array('required','max_length' => array(50), 'min_length' => array(2)),
+            'validation' => array('required','validatexto'=>array(10)),
             'form' => array('type' => 'text',
                 'class' => 'form-control',
                 'placeholder' => "Escriba su nombre"
@@ -25,7 +25,7 @@ class Model_Informacion_Personal extends \Orm\Model {
         'apellido' => array(
             'data_type' => 'string',
             'label' => 'Apellido',
-             'validation' => array('required','max_length' => array(50), 'min_length' => array(2)),
+             'validation' => array('required','validatexto'=>array(10)),
             'form' => array('type' => 'text',
                 'class' => 'form-control',
                 'placeholder' => "Escriba su apellido"
@@ -64,7 +64,7 @@ class Model_Informacion_Personal extends \Orm\Model {
         'direccion' => array(
             'data_type' => 'string',
             'label' => 'Dirección',
-            'validation' => array('required', 'max_length' => array(200), 'min_length' => array(2)),
+            'validation' => array('required','validatexto'=>array(10)),
             'form' => array('type' => 'textarea', 'class' => 'form-control',
                 'placeholder' => "Escriba su dirección"
             )

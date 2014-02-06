@@ -1,17 +1,12 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- * Description of Validacion
+ * Description of Validation
  *
- * @author wilfo martel
+ * @author wilfo y Xavier
+ * email:logica_Razon@hotmail.com
  */
- class Validacion extends \Fuel\Core\Validation {
+class Validation extends \Fuel\Core\Validation {
     //put your code here
 
     /**
@@ -45,9 +40,15 @@
         }
     }
 
-    public static function _validation_fulltexto($val,$options) {
-        if (strlen($val) < ((int)$options)) {
-           \Validation::active()->set_message('fulltexto', ':label debe tener al menos '.$options.' caracteres');
+    /**
+     * Valida longitd de textos
+     * @param type $val
+     * @param type $options
+     * @return boolean (devuelve mensajes de error en español)
+     */
+    public static function _validation_validatexto($val, $options) {
+        if (strlen($val) < ((int) $options)) {
+            \Validation::active()->set_message('validatexto', 'El campo :label debe tener al menos ' . $options . ' caracteres');
             return false;
         } else {
             return true;

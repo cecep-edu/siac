@@ -38,8 +38,8 @@ class Controller_Explaboral extends Controller_Template {
             $laboral->actividad = $fields['actividad'];
             $laboral->id_personal = $personal->id;
             if ($laboral->save()) {
-                \Response::redirect('explaboral/index');
                 \Session::set_flash('siac-message', array('success' => 'Los cambios se han guardado.'));
+                \Response::redirect('explaboral/index');  
             }
         } else {
             \Session::set_flash('siac-message', array('danger' => $fieldset->validation()->show_errors()));
@@ -75,8 +75,9 @@ class Controller_Explaboral extends Controller_Template {
             $laboral->actividad = $fields['actividad'];
 
             if ($laboral->save()) {
-                \Response::redirect('explaboral/index');
                 \Session::set_flash('siac-message', array('success' => 'Los cambios se han guardado.'));
+                \Response::redirect('explaboral/index');
+                
             } else {
                 \Session::set_flash('siac-message', array('danger' => 'Los cambios no se han guardado.'));
             }
@@ -93,8 +94,9 @@ class Controller_Explaboral extends Controller_Template {
     public function action_delete($id = null) {
         $laboral = Model_Explaboral::find(Security::xss_clean($id));
         $laboral->delete();
-        \Response::redirect('/explaboral');
         \Session::set_flash('siac-message', array('success' => 'Experiencia laboral eliminado con éxito.'));
+        \Response::redirect('/explaboral');
+        
     }
 
 }

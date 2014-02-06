@@ -37,7 +37,7 @@ class Model_Explaboral extends \Orm\Model {
         'actividad' => array(
             'data_type' => 'string',
             'label' => ' Actividad',
-            'validation' => array('required','fulltexto'=>array(10)),
+            'validation' => array('required', 'validatexto' => array(10)),
             'form' => array(
                 'type' => 'textarea',
                 'class' => 'form-control',
@@ -75,27 +75,17 @@ class Model_Explaboral extends \Orm\Model {
         ),
     );
     protected static $_table_name = 'explaborals';
-  
     protected static $_belongs_to = array(
         'informacion_personal' => array(
             'model_to' => 'Model_Informacion_Personal',
             'key_from' => 'id_personal',
             'key_to' => 'id',
         ),
-         'empresa' => array(
+        'empresa' => array(
             'model_to' => 'Model_Conf_Institucion',
             'key_from' => 'id_empresa',
             'key_to' => 'id',
         ),
     );
-    
-    public static function _validation_fulltexto($val,$options) {
-        if (strlen($val) < ((int)$options)) {
-           \Validation::active()->set_message('fulltexto', ':label debe tener al menos '.$options.' caracteres');
-            return false;
-        } else {
-            return true;
-        }
-    }
 
-} 
+}

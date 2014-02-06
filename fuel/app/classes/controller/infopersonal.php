@@ -38,10 +38,10 @@ class Controller_Infopersonal extends Controller_Template {
         $fieldset->set_config('form_attributes', array('enctype' => 'multipart/form-data'));
         $form = $fieldset->form();
 
-        
+
         //Agrega campos para autocompletado en la forma
-        $fieldset->add_after('pais', 'Pais', array('type'=>'text','class'=>'form-control','autocomplete'=>'off','placeholder' => "Escriba el nombre del país de nacimiento",), array(), 'tipo_identificador');
-        $fieldset->add_before('ciudad', 'Ciudad', array('type'=>'text','class'=>'form-control','autocomplete'=>'off','placeholder' => "Escriba la ciudad de residencia",), array(), 'direccion');        
+        $fieldset->add_after('pais', 'Pais', array('type' => 'text', 'class' => 'form-control', 'autocomplete' => 'off', 'placeholder' => "Escriba el nombre del país de nacimiento",), array(), 'tipo_identificador');
+        $fieldset->add_before('ciudad', 'Ciudad', array('type' => 'text', 'class' => 'form-control', 'autocomplete' => 'off', 'placeholder' => "Escriba la ciudad de residencia",), array(), 'direccion');
 
         $form->add('submit', '', array('type' => 'submit', 'value' => 'Crear', 'class' => 'btn btn-primary'));
 
@@ -70,16 +70,17 @@ class Controller_Infopersonal extends Controller_Template {
 
                 File::rename($path . '/uploads/' . $result[0]['name'], $path . '/uploads/' . $img_nombre);
                 if ($personal->save()) {
+                    \Session::set_flash('siac-message', array('success' => 'Los cambios se han guardado.'));
                     \Response::redirect('infopersonal/index');
+                } else {
+                    \Session::set_flash('siac-message', array('danger' => 'Los cambios no se han guardado.'));
                 }
             }
         } else {
             $this->template->messages = $fieldset->validation()->error();
         }
 
-        //$view->set('content', $form->build(), false);
         $this->template->set('content', $form->build(), false);
-        //$this->template->content =$view;
     }
 
     public function action_edit() {
@@ -87,8 +88,6 @@ class Controller_Infopersonal extends Controller_Template {
 
         $data["subnav"] = array('edit' => 'active');
         $this->template->title = 'Infopersonal &raquo; Edit';
-
-        //$view=View::forge('infopersonal/edit', $data);
 
         $config = array(
             'path' => DOCROOT . 'uploads/',
@@ -111,21 +110,13 @@ class Controller_Infopersonal extends Controller_Template {
         $fieldset->set_config('form_attributes', array('enctype' => 'multipart/form-data'));
 
         $form->add('foto_perfil', 'Foto', array('type' => 'image', 'src' => '/uploads/' . $personal->ruta_foto));
-
-        // $fieldset->add('pais_id','país',array('type'=>'text','class'=>"form-control")); 
-        //$fieldset->field('pais_id')->set_type('text');
-        //$form->add('search','',array('type'=>'text','class'=>"form-control" ));
-
-
         $form->add('submit', '', array('type' => 'submit', 'value' => 'Actualizar', 'class' => 'btn btn-primary'));
-
 
         if ($fieldset->validation()->run() == true) {
             $fields = $fieldset->validated();
 
             Upload::process($config);
 
-            //$post = new Model_Persona;
             $personal->nombre = $fields['nombre'];
             $personal->apellido = $fields['apellido'];
             $personal->identificador = $fields['identificador'];
@@ -146,7 +137,10 @@ class Controller_Infopersonal extends Controller_Template {
             }
 
             if ($personal->save()) {
+                \Session::set_flash('siac-message', array('success' => 'Los cambios se han guardado.'));
                 \Response::redirect('infopersonal/index');
+            } else {
+                \Session::set_flash('siac-message', array('danger' => 'Los cambios no se han guardado.'));
             }
         } else {
             $this->template->messages = $fieldset->validation()->error();
@@ -154,7 +148,6 @@ class Controller_Infopersonal extends Controller_Template {
 
         $this->template->content = View::forge('infopersonal/edit', $data);
         $this->template->set('content', $form->build(), false);
-        //$this->template->content=$view;
     }
 
     public function action_view() {
@@ -172,9 +165,6 @@ class Controller_Infopersonal extends Controller_Template {
 
         $this->template->title = 'Infopersonal &raquo; View';
         $this->template->content = View::forge('infopersonal/view', $data);
-       
     }
-
-    
 
 }

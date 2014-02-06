@@ -34,7 +34,7 @@ class Model_Idioma extends \Orm\Model {
         'nombre_certificado' => array(
             'data_type' => 'String',
             'label' => ' Certificado de Suficiencia',
-            'validation' => array('required','fulltexto'=>array(10)),
+            'validation' => array('required', 'validatexto' => array(10)),
             'form' => array(
                 'type' => 'textarea',
                 'class' => 'form-control',
@@ -94,14 +94,5 @@ class Model_Idioma extends \Orm\Model {
             'key_to' => 'id',
         ),
     );
-
-    public static function _validation_fulltexto($val, $options) {
-        if (strlen($val) < ((int) $options)) {
-            \Validation::active()->set_message('fulltexto', ':label debe tener al menos ' . $options . ' caracteres');
-            return false;
-        } else {
-            return true;
-        }
-    }
 
 }

@@ -48,7 +48,7 @@
                     </tr>
                     <tr>
                         <td>NACIONALIDAD</td>
-                        <td colspan="3">Ecuador</td>
+                        <td colspan="3"><?php echo $personal->conf_paises->nom_pais; ?></td>
 
                     </tr>
                     <tr>

@@ -83,8 +83,8 @@ class Controller_Proyecto extends Controller_Template {
             $proyecto->duracion = $fields['duracion'];
 
             if ($proyecto->save()) {
-                \Response::redirect('proyecto/index');
                 \Session::set_flash('siac-message', array('success' => 'Los cambios se han guardado.'));
+                \Response::redirect('proyecto/index');
             } else {
                 \Session::set_flash('siac-message', array('danger' => 'Los cambios no se han guardado.'));
             }
@@ -102,8 +102,8 @@ class Controller_Proyecto extends Controller_Template {
     public function action_delete($id = null) {
         $proyecto = Model_Proyecto::find(Security::xss_clean($id));
         $proyecto->delete();
-        \Response::redirect('proyecto/index');
         \Session::set_flash('siac-message', array('success' => 'Proyecto eliminado con éxito.'));
+        \Response::redirect('proyecto/index');
     }
 
 }

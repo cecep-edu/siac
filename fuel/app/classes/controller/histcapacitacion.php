@@ -45,8 +45,8 @@ class Controller_Histcapacitacion extends Controller_Template {
             $capacitacion->id_tpcertificado = $fields['id_tpcertificado'];
 
             if ($capacitacion->save()) {
-                \Response::redirect('histcapacitacion/index');
                 \Session::set_flash('siac-message', array('success' => 'Los cambios se han guardado.'));
+                \Response::redirect('histcapacitacion/index');
             }
         } else {
             \Session::set_flash('siac-message', array('danger' => $fieldset->validation()->show_errors()));
@@ -91,8 +91,8 @@ class Controller_Histcapacitacion extends Controller_Template {
             $capacitacion->id_tpcertificado = $fields['id_tpcertificado'];
 
             if ($capacitacion->save()) {
-                \Response::redirect('histcapacitacion/index');
                 \Session::set_flash('siac-message', array('success' => 'Los cambios se han guardado.'));
+                \Response::redirect('histcapacitacion/index');
             } else {
                 \Session::set_flash('siac-message', array('danger' => 'Los cambios no se han guardado.'));
             }
@@ -110,8 +110,8 @@ class Controller_Histcapacitacion extends Controller_Template {
     public function action_delete($id = null) {
         $capacitacion = Model_Histcapacitacion::find(Security::xss_clean($id));
         $capacitacion->delete();
-        \Response::redirect('histcapacitacion/index');
         \Session::set_flash('siac-message', array('sucess' => 'Capacitación eliminado con éxito.'));
+        \Response::redirect('histcapacitacion/index');
     }
 
 }

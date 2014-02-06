@@ -31,7 +31,7 @@ class Model_Publicacion extends \Orm\Model {
         'titulo' => array(
             'data_type' => 'string',
             'label' => ' Título',
-            'validation' => array('required', 'fulltexto'=>array(10)),
+            'validation' => array('required', 'validatexto' => array(10)),
             'form' => array('type' => 'textarea',
                 'class' => 'form-control',
                 'rows' => 3,
@@ -42,7 +42,7 @@ class Model_Publicacion extends \Orm\Model {
         'isbn' => array(
             'data_type' => 'string',
             'label' => ' Título',
-            'validation' => array('required','fulltexto'=>array(8)),
+            'validation' => array('required', 'validatexto' => array(8)),
             'form' => array('type' => 'text',
                 'class' => 'form-control',
                 'placeholder' => "isbn:085649856"
@@ -51,7 +51,7 @@ class Model_Publicacion extends \Orm\Model {
         'observacion' => array(
             'data_type' => 'string',
             'label' => ' Observación',
-            'validation' => array('required', 'fulltexto'=>array(5)),
+            'validation' => array('required', 'validatexto' => array(5)),
             'form' => array('type' => 'textarea',
                 'class' => 'form-control',
                 'rows' => 4,
@@ -98,14 +98,5 @@ class Model_Publicacion extends \Orm\Model {
             'key_to' => 'id',
         ),
     );
-
-    public static function _validation_fulltexto($val, $options) {
-        if (strlen($val) < ((int) $options)) {
-            \Validation::active()->set_message('fulltexto', ':label debe tener al menos ' . $options . ' caracteres');
-            return false;
-        } else {
-            return true;
-        }
-    }
 
 }

@@ -20,24 +20,24 @@ class Model_Conf_Instruccion extends \Orm\Model {
             'data_type' => 'int',
             'label' => 'Institución',
             'validation' => array('required'),
-            'form' => array('type'=>'hidden'),
+            'form' => array('type' => 'hidden'),
         ),
         'id_especializacion' => array(
             'data_type' => 'int',
             'label' => 'Especialización',
             'validation' => array('required'),
-            'form' => array('type'=>'hidden'),
+            'form' => array('type' => 'hidden'),
         ),
         'id_titulo' => array(
             'data_type' => 'int',
             'label' => 'Título',
             'validation' => array('required'),
-            'form' => array('type'=>'hidden'),
+            'form' => array('type' => 'hidden'),
         ),
         'registro_oficial' => array(
             'data_type' => 'int',
             'label' => 'Registro SENESCYT',
-            'validation' => array('required','max_length' => array(5)),
+            'validation' => array('required', 'validatexto'=>array(8)),
             'form' => array('class' => 'form-control'),
         ),
         'created_at' => array(
@@ -58,10 +58,7 @@ class Model_Conf_Instruccion extends \Orm\Model {
         ),
     );
     protected static $_table_name = 'conf_instrucciones';
-    
-    
     protected static $_belongs_to = array(
-        
         'informacion_personals' => array(
             'key_from' => 'id_perfil',
             'model_to' => 'Model_Informacion_Personal',
@@ -69,15 +66,13 @@ class Model_Conf_Instruccion extends \Orm\Model {
             'cascade_save' => false,
             'cascade_detele' => false,
         ),
-        
-         'conf_niveles' => array(
+        'conf_niveles' => array(
             'key_from' => 'id_nivel',
             'model_to' => 'Model_Conf_Nivel',
             'key_to' => 'id',
             'cascade_save' => false,
             'cascade_detele' => false,
         ),
-        
         'conf_instituciones' => array(
             'key_from' => 'id_institucion',
             'model_to' => 'Model_Conf_Institucion',
@@ -85,7 +80,6 @@ class Model_Conf_Instruccion extends \Orm\Model {
             'cascade_save' => false,
             'cascade_detele' => false,
         ),
-        
         'conf_especializaciones' => array(
             'key_from' => 'id_especializacion',
             'model_to' => 'Model_Conf_Especializacion',
@@ -93,7 +87,6 @@ class Model_Conf_Instruccion extends \Orm\Model {
             'cascade_save' => false,
             'cascade_detele' => false,
         ),
-        
         'conf_titulos' => array(
             'key_from' => 'id_titulo',
             'model_to' => 'Model_Conf_Titulo',
@@ -101,10 +94,10 @@ class Model_Conf_Instruccion extends \Orm\Model {
             'cascade_save' => false,
             'cascade_detele' => false,
         ),
-        
     );
     protected static $_has_one = array(
-       
     );
+
+   
 
 }

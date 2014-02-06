@@ -44,8 +44,8 @@ class Controller_Publicacion extends Controller_Template {
             $publicacion->observacion = $fields['observacion'];
 
             if ($publicacion->save()) {
-                \Response::redirect('publicacion/index');
                 \Session::set_flash('siac-message', array('success' => 'Los cambios se han guardado.'));
+                \Response::redirect('publicacion/index');
             }
         } else {
             \Session::set_flash('siac-message', array('danger' => $fieldset->validation()->show_errors()));
@@ -82,8 +82,8 @@ class Controller_Publicacion extends Controller_Template {
             $publicacion->observacion = $fields['observacion'];
 
             if ($publicacion->save()) {
-                \Response::redirect('publicacion/index');
                 \Session::set_flash('siac-message', array('success' => 'Los cambios se han guardado.'));
+                \Response::redirect('publicacion/index');
             } else {
                 \Session::set_flash('siac-message', array('danger' => 'Los cambios no se han guardado.'));
             }
@@ -101,8 +101,8 @@ class Controller_Publicacion extends Controller_Template {
     public function action_delete($id = null) {
         $publicacion = Model_Publicacion::find(Security::xss_clean($id));
         $publicacion->delete();
-        \Response::redirect('publicacion/index');
         \Session::set_flash('siac-message', array('success' => 'Publicación eliminada con éxito.'));
+        \Response::redirect('publicacion/index');
     }
 
 }

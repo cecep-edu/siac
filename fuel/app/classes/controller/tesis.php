@@ -43,8 +43,8 @@ class Controller_Tesis extends Controller_Template {
             $tesis->anio = $fields['anio'];
 
             if ($tesis->save()) {
-                \Response::redirect('tesis/index');
                 \Session::set_flash('siac-message', array('success' => 'Los cambios se han guardado.'));
+                \Response::redirect('tesis/index');
             } else {
                 \Session::set_flash('siac-message', array('danger' => 'Los cambios no se han guardado.'));
             }
@@ -81,8 +81,8 @@ class Controller_Tesis extends Controller_Template {
             $tesis->anio = $fields['anio'];
 
             if ($tesis->save()) {
-                \Response::redirect('tesis/index');
                 \Session::set_flash('siac-message', array('success' => 'Los cambios se han guardado.'));
+                \Response::redirect('tesis/index');
             } else {
                 \Session::set_flash('siac-message', array('danger' => 'Los cambios no se han guardado.'));
             }
@@ -100,8 +100,8 @@ class Controller_Tesis extends Controller_Template {
     public function action_delete($id = null) {
         $tesis = Model_Tesi::find(Security::xss_clean($id));
         $tesis->delete($id);
+        \Session::set_flash('siac-message', array('success' => 'Tesis eliminada con éxito.'));
         \Response::redirect('tesis/index');
-         \Session::set_flash('siac-message', array('success' => 'Tesis eliminada con éxito.'));
     }
 
 }
